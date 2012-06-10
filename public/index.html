@@ -18,16 +18,13 @@
 
 <div id="results">
 
-<pre><code><span class="s">&lt;</span><span class="e">people</span><span class="s">&gt;</span>
-	<span class="s h">&lt;</span><span class="e h">person</span><span class="s h">&gt;</span>
-		<span class="s">&lt;</span><span class="e">name</span><span class="s">&gt;</span><span class="t">Jack Slater</span><span class="s">&lt;</span><span class="e">/name</span><span class="s">&gt;</span>
-		<span class="s">&lt;</span><span class="e">email</span><span class="s">&gt;</span><span class="t">braunschweiger@gmail.com</span><span class="s">&lt;</span><span class="e">/email</span><span class="s">&gt;</span>
-	<span class="s">&lt;</span><span class="e">/person</span><span class="s">&gt;</span>
-<span class="s">&lt;</span><span class="e">/people</span><span class="s">&gt;</span>
-</code></pre>
-
 </div>
 
-
+<script src="/scripts/zepto.min.js"></script>
+<script>
+$(function() {
+	$("#results").load("/xml/data.xml");
+});
+</script>
 </body>
 </html>

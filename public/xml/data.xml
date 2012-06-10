@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="xmlverbatimwrapper.xsl"?>
+<people>
+	<person>
+		<name>Jack Slater</name>
+		<email>braunschweiger@gmail.com</email>
+	</person>
+	<person>
+		<name>Jack Shepard</name>
+		<email>jack.shepard@4815162342x.com</email>
+	</person>
+</people>
