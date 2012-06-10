@@ -15,13 +15,13 @@ html {
   height: 100%;
 }
 body {
-  height: 100%;
   background: #cdcdcd;
   background: -webkit-linear-gradient(top, #cdcdcd, #a0a0a0);
   background: -moz-linear-gradient(top, #cdcdcd, #a0a0a0);
   background: -ms-linear-gradient(top, #cdcdcd, #a0a0a0);
   background: -o-linear-gradient(top, #cdcdcd, #a0a0a0);
   background: linear-gradient(top, #cdcdcd, #a0a0a0);
+  height: 100%;
 }
 .HUD {
   -webkit-border-radius: 12px;
@@ -32,13 +32,14 @@ body {
   -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
-  position: absolute;
   width: 80%;
-  top: 50%;
-  left: 50%;
-  margin: -25px auto 0 -40%;
+  margin: 1em auto;
   background: rgba(0, 0, 0, 0.1);
   padding: 10px;
+}
+#results {
+  margin: 0 auto;
+  width: 80%;
 }
 form {
   margin: 0 20px;
@@ -85,13 +86,18 @@ pre {
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
   border-radius: 8px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.75) inset;
   -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.75) inset;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.75) inset;
   padding: 1em;
-  margin: 1em;
+  margin: 1em 0;
   background: #efefef;
-  width: 40em;
+  width: 100%;
   border: 1px solid #ddd;
 }
 pre code {

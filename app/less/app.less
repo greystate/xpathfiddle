@@ -2,22 +2,24 @@
 
 html { height: 100%; }
 body {
-	height: 100%;
 	.linear-gradient(top, #cdcdcd, #a0a0a0);
+	
+	height: 100%;
 }
 
 .HUD {
 	.border-radius(12px);
 	.box-shadow(0, 0, 2px, rgba(0, 0, 0, 0.4));
 	
-	position: absolute;
 	width: 80%;
-	top: 50%;
-	left: 50%;
-	margin: -25px auto 0 -40%;
+	margin: 1em auto;
 	background: rgba(0, 0, 0, 0.1);
 	padding: 10px;
+}
 
+#results {
+	.centered;
+	width: 80%;
 }
 
 form {
@@ -50,12 +52,13 @@ input {
 
 pre {
 	.border-radius(8px);
+	.box-sizing(border-box);
 	.box-shadow-inset(0, 1px, 4px, rgba(0, 0, 0, 0.75);
 
 	padding: 1em;
-	margin: 1em;
+	margin: 1em 0;
 	background: #efefef;
-	width: 40em;
+	width: 100%;
 
 	border: 1px solid #ddd;
 }
