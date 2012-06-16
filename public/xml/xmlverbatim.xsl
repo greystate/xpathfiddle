@@ -34,9 +34,22 @@
 
    <xsl:param name="indent-elements" select="false()" />
 
-   <xsl:param name="xpath" select="'/people/*'" />
+   <xsl:param name="xpath" select="'//name'" />
 
    <xsl:param name="matched-nodes" select="&evaluate;($xpath)" />
+
+   <xsl:attribute-set name="attr-classes">
+      <xsl:attribute name="class">
+         <xsl:text>xmlverb-attr-name</xsl:text>
+         <xsl:if test="$matched-nodes[generate-id() = generate-id(current())]"><xsl:text> xpath-match</xsl:text></xsl:if>
+      </xsl:attribute>
+   </xsl:attribute-set>
+   <xsl:attribute-set name="element-classes">
+      <xsl:attribute name="class">
+         <xsl:text>xmlverb-element-name</xsl:text>
+         <xsl:if test="$matched-nodes[generate-id() = generate-id(current())]"><xsl:text> xpath-match</xsl:text></xsl:if>
+      </xsl:attribute>
+   </xsl:attribute-set>
 
    <xsl:template match="/">
       <xsl:apply-templates select="." mode="xmlverb" />
@@ -88,9 +101,7 @@
          </span>
          <xsl:text>:</xsl:text>
       </xsl:if>
-      <span class="xmlverb-element-name">
-         <!-- Add XPath Fiddle class? -->
-         <xsl:if test="$matched-nodes[generate-id() = generate-id(current())]"><xsl:attribute name="class">xmlverb-element-name xpath-match</xsl:attribute></xsl:if>
+      <span xsl:use-attribute-sets="element-classes">
          <xsl:value-of select="local-name()"/>
       </span>
       <xsl:variable name="pns" select="../namespace::*"/>
@@ -146,7 +157,7 @@
    <!-- attribute nodes -->
    <xsl:template name="xmlverb-attrs">
       <xsl:text> </xsl:text>
-      <span class="xmlverb-attr-name">
+      <span xsl:use-attribute-sets="attr-classes">
          <xsl:value-of select="name()"/>
       </span>
       <xsl:text>=&quot;</xsl:text>
@@ -180,6 +191,7 @@
    <!-- text nodes -->
    <xsl:template match="text()" mode="xmlverb">
       <span class="xmlverb-text">
+         <xsl:if test="$matched-nodes[generate-id() = generate-id(current())]"><xsl:attribute name="class">xmlverb-text xpath-match</xsl:attribute></xsl:if>
          <xsl:call-template name="preformatted-output">
             <xsl:with-param name="text">
                <xsl:call-template name="html-replace-entities">
