@@ -53,7 +53,7 @@ fieldset {
   border-radius: 6px;
   border: none;
 }
-fieldset#xpath {
+fieldset#xpath-expression {
   -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
   -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
