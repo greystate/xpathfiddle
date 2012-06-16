@@ -30,12 +30,37 @@ form {
 
 fieldset {
 	.border-radius(6px);
-	.box-shadow(0, 0, 8px, rgba(0, 0, 0, 0.6));
 
-	border: none;
-	background: #fff;
-	padding: 10px;
+	border: none;	
+
+	&#xpath {
+		.box-shadow(0, 0, 8px, rgba(0, 0, 0, 0.6));
+
+		background: #fff;
+		padding: 10px;
+	}
+
+	&#settings {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		border: 2px groove #efefef;
+		display: none;
+	}
 }
+
+.radiobutton {
+	overflow: hidden;
+	clear: both;
+	
+	input { float: left; background: lime; }
+	
+	label {
+		display: inline;
+		float: right;
+	}
+}
+
 
 label, legend { display: none; }
 

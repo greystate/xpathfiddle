@@ -51,12 +51,33 @@ fieldset {
   -ms-border-radius: 6px;
   -o-border-radius: 6px;
   border-radius: 6px;
+  border: none;
+}
+fieldset#xpath {
   -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
   -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
-  border: none;
   background: #fff;
   padding: 10px;
+}
+fieldset#settings {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border: 2px groove #efefef;
+  display: none;
+}
+.radiobutton {
+  overflow: hidden;
+  clear: both;
+}
+.radiobutton input {
+  float: left;
+  background: lime;
+}
+.radiobutton label {
+  display: inline;
+  float: right;
 }
 label,
 legend {

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-
+<!DOCTYPE xsl:stylesheet [
+	<!ENTITY evaluate "xpath:evaluate">
+	<!ENTITY evaluate-ns-uri "http://exslt.org/dynamic">
+]>
 <!--
     XML to HTML Verbatim Formatter with Syntax Highlighting
     Version 1.1
@@ -24,11 +27,16 @@
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:verb="http://informatik.hu-berlin.de/xmlverbatim"
-                exclude-result-prefixes="verb">
+                xmlns:xpath="&evaluate-ns-uri;"
+                exclude-result-prefixes="verb xpath">
 
    <xsl:output method="html" omit-xml-declaration="yes" indent="no"/>
 
    <xsl:param name="indent-elements" select="false()" />
+
+   <xsl:param name="xpath" select="'/people/*'" />
+
+   <xsl:param name="matched-nodes" select="&evaluate;($xpath)" />
 
    <xsl:template match="/">
       <xsl:apply-templates select="." mode="xmlverb" />
@@ -81,6 +89,8 @@
          <xsl:text>:</xsl:text>
       </xsl:if>
       <span class="xmlverb-element-name">
+         <!-- Add XPath Fiddle class? -->
+         <xsl:if test="$matched-nodes[generate-id() = generate-id(current())]"><xsl:attribute name="class">xmlverb-element-name xpath-match</xsl:attribute></xsl:if>
          <xsl:value-of select="local-name()"/>
       </span>
       <xsl:variable name="pns" select="../namespace::*"/>
