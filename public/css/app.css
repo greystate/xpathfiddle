@@ -39,6 +39,7 @@ body {
 }
 #results {
   margin: 0 auto;
+  font-family: courier, monospace;
   width: 80%;
 }
 form {
@@ -80,7 +81,7 @@ input {
   background: #eee;
   padding: 5px;
 }
-pre {
+#results {
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
@@ -95,9 +96,7 @@ pre {
   -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.75) inset;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.75) inset;
   padding: 1em;
-  margin: 1em 0;
   background: #efefef;
-  width: 100%;
   border: 1px solid #ddd;
 }
 pre code {
@@ -115,4 +114,43 @@ pre code {
 }
 .h {
   background: #ffc;
+}
+.xmlverb-default {
+  color: #333333;
+  background-color: transparent;
+}
+.xmlverb-element-name {
+  color: #990000;
+}
+.xmlverb-element-nsprefix {
+  color: #666600;
+}
+.xmlverb-attr-name {
+  color: #660000;
+}
+.xmlverb-attr-content {
+  color: #000099;
+  font-weight: bold;
+}
+.xmlverb-ns-name {
+  color: #666600;
+}
+.xmlverb-ns-uri {
+  color: #330099;
+}
+.xmlverb-text {
+  color: #000000;
+  font-weight: bold;
+}
+.xmlverb-comment {
+  color: #006600;
+  font-style: italic;
+}
+.xmlverb-pi-name {
+  color: #006600;
+  font-style: italic;
+}
+.xmlverb-pi-content {
+  color: #006666;
+  font-style: italic;
 }
