@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<people xmlns:demo="http://xmlns.greystate.dk/2010/demo-namespace">
+<people>
 	<note xml:lang="da">Test af xml:lang attribut</note>
 	<person>
 		<name>Jack Slater</name>
