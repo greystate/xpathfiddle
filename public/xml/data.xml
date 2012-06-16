@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="xmlverbatimwrapper.xsl"?>
-<people>
+<people xmlns:demo="http://xmlns.greystate.dk/2010/demo-namespace">
 	<person>
 		<name>Jack Slater</name>
 		<email>braunschweiger@gmail.com</email>
