@@ -8,11 +8,17 @@
 </head>
 <body>
 
-<form id="expression" class="HUD">
-	<fieldset>
+<form action="/" id="expression" class="HUD">
+	<fieldset id="xpath">
 		<legend>XPath</legend>
 		<label for="xpath">Expression</label>
 		<input type="text" placeholder="Type an expression, e.g.: people/person[2]" />
+	</fieldset>
+	
+	<fieldset id="settings">
+		<legend>Settings</legend>
+		<div class="radiobutton"><input type="radio" name="view" id="view-filter"><label>Filter</label></div>
+		<div class="radiobutton"><input type="radio" name="view" id="view-hilite"><label>Highlight</label></div>
 	</fieldset>
 </form>
 
