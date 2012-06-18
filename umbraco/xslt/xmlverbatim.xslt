@@ -41,6 +41,12 @@
          <xsl:if test="$matched-nodes[generate-id() = generate-id(current())]"><xsl:text> xpath-match</xsl:text></xsl:if>
       </xsl:attribute>
    </xsl:attribute-set>
+   <xsl:attribute-set name="element-prefix-classes">
+      <xsl:attribute name="class">
+         <xsl:text>xmlverb-element-nsprefix</xsl:text>
+         <xsl:if test="$matched-nodes[generate-id() = generate-id(current())]"><xsl:text> xpath-match</xsl:text></xsl:if>
+      </xsl:attribute>
+   </xsl:attribute-set>
 
    <xsl:template match="/">
       <xsl:apply-templates select="." mode="xmlverb" />
@@ -87,7 +93,7 @@
       <xsl:variable name="ns-prefix"
                     select="substring-before(name(),':')" />
       <xsl:if test="$ns-prefix != ''">
-         <span class="xmlverb-element-nsprefix">
+         <span xsl:use-attribute-sets="element-prefix-classes">
             <xsl:value-of select="$ns-prefix"/>
          </span>
          <xsl:text>:</xsl:text>
