@@ -51,7 +51,9 @@ $(function() {
 		var matches = location.search.match(/xpath=([^&#]+)/);
 		var xpath = matches ? RegExp.$1 : "";
 		
-		$xpathField.val(decodeURIComponent(xpath));		 
+		xpath = xpath.replace(/\+/g, " ");
+
+		$xpathField.val(decodeURIComponent(xpath));
 	}
 	$xpathField.focus();
 	$xpathField[0].select();

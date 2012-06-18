@@ -39,7 +39,10 @@ $(function() {
 	if (location.search) {
 		var matches = location.search.match(/xpath=([^&#]+)/);
 		var xpath = matches ? RegExp.$1 : "";
-		
+
+		// decodeURIComponent() doesn't fix the spaces converted to +
+		xpath = xpath.replace(/\+/g, " ");
+
 		$xpathField.val(decodeURIComponent(xpath));
 	}
 	$xpathField.focus();
