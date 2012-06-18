@@ -34,7 +34,7 @@
 
    <xsl:param name="indent-elements" select="false()" />
 
-   <xsl:param name="xpath" select="'//person[name = &quot;Jack Slater&quot;]'" />
+   <xsl:param name="xpath" select="'people/person[2]'" />
 
    <xsl:param name="matched-nodes" select="&evaluate;($xpath)" />
 
