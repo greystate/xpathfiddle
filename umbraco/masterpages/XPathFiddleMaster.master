@@ -1,0 +1,51 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/umbraco/masterpages/default.master" AutoEventWireup="true" %>
+<asp:Content ContentPlaceHolderID="ContentPlaceHolderDefault" runat="server"><!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>XPath Fiddle</title>
+	
+	<link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+<form action="/xpath-fiddle.aspx" id="expression" class="HUD">
+	<fieldset id="xpath-expression">
+		<legend>XPath</legend>
+		<label for="xpath">Expression</label>
+		<input id="xpath" name="xpath" type="text" placeholder="Type an expression, e.g.: people/person[2]" />
+	</fieldset>
+	
+	<fieldset id="settings">
+		<legend>Settings</legend>
+		<div class="radiobutton"><input type="radio" name="view" id="view-filter"><label>Filter</label></div>
+		<div class="radiobutton"><input type="radio" name="view" id="view-hilite"><label>Highlight</label></div>
+	</fieldset>
+	
+	<!-- <button type="submit">Evaluate</button> -->
+</form>
+
+<div id="results">
+
+<umbraco:Macro alias="XPathFiddleResult" runat="server" />
+
+</div>
+
+<script src="/scripts/zepto.min.js"></script>
+<script>
+$(function() {
+	var $xpathField = $("#xpath");
+	
+	if (location.search) {
+		var matches = location.search.match(/xpath=([^&#]+)/);
+		var xpath = matches ? RegExp.$1 : "";
+		
+		$xpathField.val(decodeURIComponent(xpath));
+	}
+	$xpathField.focus();
+	$xpathField[0].select();
+});
+</script>
+</body>
+</html>
+</asp:Content>
