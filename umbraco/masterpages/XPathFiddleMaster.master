@@ -14,23 +14,8 @@
 
 
 <script src="/scripts/zepto.min.js"></script>
-<script>
-$(function() {
-	var $xpathField = $("#xpath");
-	
-	// if (location.search) {
-	// 	var matches = location.search.match(/xpath=([^&#]+)/);
-	// 	var xpath = matches ? RegExp.$1 : "";
-	// 
-	// 	// decodeURIComponent() doesn't fix the spaces converted to +
-	// 	xpath = xpath.replace(/\+/g, " ");
-	// 
-	// 	$xpathField.val(decodeURIComponent(xpath));
-	// }
-	$xpathField.focus();
-	$xpathField[0].select();
-});
-</script>
+<script src="/scripts/app.js"></script>
+
 </body>
 </html>
 </asp:Content>
