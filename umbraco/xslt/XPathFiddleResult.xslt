@@ -50,6 +50,11 @@
 			<xsl:apply-templates select="$data" mode="xmlverb">
 				<xsl:with-param name="indent-elements" select="true()" />
 			</xsl:apply-templates>
+
+			<dl id="stats">
+				<dt># of matches: </dt>
+				<dd><xsl:value-of select="count($matched-nodes)" /></dd>
+			</dl>
 		</div>
 		
 	</xsl:template>
