@@ -139,7 +139,7 @@ input[type=text] {
   white-space: nowrap;
   overflow: hidden;
   display: block;
-  width: 100px;
+  width: 50px;
   height: 3px;
   margin: -10px auto 5px;
   cursor: pointer;
