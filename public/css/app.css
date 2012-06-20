@@ -37,11 +37,6 @@ body {
   background: rgba(0, 0, 0, 0.1);
   padding: 10px;
 }
-#results {
-  margin: 0 auto;
-  font-family: courier, monospace;
-  width: 80%;
-}
 form {
   margin: 0 20px;
 }
@@ -60,12 +55,49 @@ fieldset#xpath-expression {
   background: #fff;
   padding: 10px;
 }
+fieldset#xml-document {
+  -webkit-perspective: 500px;
+  -webkit-transform-style: preserve-3d;
+  height: 0;
+  padding: 0;
+}
+fieldset#xml-document .top,
+fieldset#xml-document .bottom {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  height: 0;
+  margin: 0;
+}
+fieldset#xml-document .top {
+  -webkit-transform: rotatex(-90deg);
+}
+fieldset#xml-document .bottom {
+  -webkit-transform: rotatex(90deg);
+}
+fieldset#xml-document.out .top,
+fieldset#xml-document.out .bottom {
+  -webkit-transform: rotatex(0deg);
+  height: 42px;
+}
+fieldset#xml-document.out {
+  height: auto;
+  padding: 10px 12px 5px;
+}
+fieldset#xml-document.out input {
+  margin-top: 0;
+  height: 42px;
+}
 fieldset#settings {
+  display: none;
   position: absolute;
   top: 10px;
   left: 10px;
   border: 2px groove #efefef;
-  display: none;
+  width: 15%;
+  margin: 0;
 }
 .radiobutton {
   overflow: hidden;
@@ -83,7 +115,7 @@ label,
 legend {
   display: none;
 }
-input {
+input[type=text] {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -102,7 +134,20 @@ input {
   background: #eee;
   padding: 5px;
 }
+#toggle {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  height: 20px;
+  margin-top: -10px;
+  cursor: pointer;
+  border-top: 1px dotted #a4a4a4;
+}
 #results {
+  margin: 0 auto;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
@@ -116,9 +161,24 @@ input {
   -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.75) inset;
   -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.75) inset;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.75) inset;
+  font-family: courier, monospace;
+  width: 80%;
   padding: 1em;
   background: #efefef;
   border: 1px solid #ddd;
+  position: relative;
+}
+.panel #results {
+  width: 75%;
+  margin-left: 20%;
+}
+.panel #settings {
+  display: block;
+}
+.panel form {
+  width: 75%;
+  margin-left: 20%;
+  padding: 0;
 }
 pre code {
   font: monaco, courier, monospace;
