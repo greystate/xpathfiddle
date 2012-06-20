@@ -22,9 +22,12 @@
     };
 
     FiddleController.prototype.toggleFold = function() {
-      var $fold;
+      var $fold, $xdocField;
       $fold = $("#xml-document");
-      return $fold.toggleClass("out");
+      $fold.toggleClass("out");
+      $xdocField = $("#xdoc");
+      $xdocField.focus();
+      return $xdocField[0].select();
     };
 
     return FiddleController;

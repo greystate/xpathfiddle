@@ -18,6 +18,9 @@ class FiddleController
 	toggleFold: () ->
 		$fold = $ "#xml-document"
 		$fold.toggleClass "out"
+		$xdocField = $ "#xdoc"
+		$xdocField.focus()
+		$xdocField[0].select()
 
 # Start everything when the page is ready
 $ ->
