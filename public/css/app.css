@@ -139,12 +139,21 @@ input[type=text] {
   white-space: nowrap;
   overflow: hidden;
   display: block;
-  margin: 0 auto;
-  width: 80%;
-  height: 20px;
-  margin-top: -10px;
+  width: 100px;
+  height: 3px;
+  margin: -10px auto 5px;
   cursor: pointer;
-  border-top: 1px dotted #a4a4a4;
+  border-top: 4px double #a4a4a4;
+  border-bottom: 4px double #a4a4a4;
+}
+button[type="submit"] {
+  height: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  display: block;
+  border: none;
 }
 #results {
   margin: 0 auto;
