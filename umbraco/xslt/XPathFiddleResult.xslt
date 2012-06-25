@@ -32,7 +32,7 @@
 			<fieldset id="xpath-expression">
 				<legend>XPath</legend>
 				<label for="xpath">Expression</label>
-				<input id="xpath" name="xpath" type="text" placeholder="Type an expression, e.g.: people/person[2]">
+				<input id="xpath" name="xpath" type="text" placeholder="Type an expression, e.g.: people/person[2]" tabindex="1">
 					<xsl:if test="$xpath">
 						<xsl:attribute name="value"><xsl:value-of select="$xpath" /></xsl:attribute>
 					</xsl:if>
@@ -42,7 +42,7 @@
 			<fieldset id="xml-document">
 				<legend>XML</legend>
 				<label for="xdoc">URL</label>
-				<input class="top" id="xdoc" name="xdoc" type="text" placeholder="URL for the XML document, e.g.: data.xml">
+				<input class="top" id="xdoc" name="xdoc" type="text" placeholder="URL for the XML document, e.g.: data.xml" tabindex="3">
 					<xsl:if test="$doc">
 						<xsl:attribute name="value"><xsl:value-of select="$doc" /></xsl:attribute>
 					</xsl:if>
@@ -58,7 +58,7 @@
 			<button type="submit">Go</button>
 		</form>
 
-		<a href="#" id="toggle">Open</a>
+		<a href="#" id="toggle" tabindex="2">Open</a>
 
 		<xsl:if test="$data">
 						
