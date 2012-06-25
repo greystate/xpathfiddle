@@ -5,33 +5,43 @@
 	border: 1px solid #aaa;
 	border-width: 1px 0;
 	background-color: rgba(255, 240, 30, 0.4);
+}
 
+.filtered .xpath-match {
+	.border-radius(0);
+	.text-shadow(none);
+	
+	border: none;
+	border-width: 0;
+	background-color: transparent;
 }
 
 #stats {
-	.border-radius(8px);
-	.box-shadow(0, 2px, 8px, rgba(0, 0, 0, 0.4));
+//	.border-radius(8px);
+//	.box-shadow-inset(0, 0, 4px, rgba(0, 0, 0, 0.4));
+	.text-shadow(0, 1px, 0, rgba(255, 255, 255, 0.9));
 	
-	background: rgba(0, 0, 0, 0.8);
-	color: #fff;
+	color: #999;
 	position: absolute;
-	width: 140px;
+	width: 180px;
 	min-height: 50px;
 	font-size: 11px;
-	top: 10px;
-	right: 10px;
+	top: 0;
+	right: 0;
 	padding: 15px;
 	text-align: right;
 	clear: both;
 	
 	dt {
-		width: 70%;
-		float: left;
+		display: inline;
+		margin: 0;
+		padding: 0;
 	}
 	
 	dd {
-		width: 30%;
-		float: left;
+		margin: 0;
+		padding: 0;
+		display: inline;
 	}
 }
 
