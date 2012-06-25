@@ -47,6 +47,12 @@
          <xsl:if test="$matched-nodes[generate-id() = generate-id(current())]"><xsl:text> xpath-match</xsl:text></xsl:if>
       </xsl:attribute>
    </xsl:attribute-set>
+   <xsl:attribute-set name="text-classes">
+      <xsl:attribute name="class">
+         <xsl:text>xmlverb-text</xsl:text>
+         <xsl:if test="$matched-nodes[generate-id() = generate-id(current())]"><xsl:text> xpath-match</xsl:text></xsl:if>
+      </xsl:attribute>
+   </xsl:attribute-set>
 
    <xsl:template match="/">
       <xsl:apply-templates select="." mode="xmlverb" />
@@ -187,8 +193,7 @@
 
    <!-- text nodes -->
    <xsl:template match="text()" mode="xmlverb">
-      <span class="xmlverb-text">
-         <xsl:if test="$matched-nodes[generate-id() = generate-id(current())]"><xsl:attribute name="class">xmlverb-text xpath-match</xsl:attribute></xsl:if>
+      <span xsl:use-attribute-sets="text-classes">
          <xsl:call-template name="preformatted-output">
             <xsl:with-param name="text">
                <xsl:call-template name="html-replace-entities">
