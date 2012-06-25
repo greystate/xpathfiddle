@@ -11,10 +11,7 @@
     }
 
     FiddleController.prototype.setup = function() {
-      var $xpathField;
-      $xpathField = $("#xpath");
-      $xpathField.focus();
-      $xpathField[0].select();
+      this.focusAndSelect("#xpath");
       return ($("#toggle")).on("click", function(e) {
         e.preventDefault();
         return app.controller.toggleFold();
@@ -22,12 +19,20 @@
     };
 
     FiddleController.prototype.toggleFold = function() {
-      var $fold, $xdocField;
+      var $fold;
       $fold = $("#xml-document");
       $fold.toggleClass("out");
-      $xdocField = $("#xdoc");
-      $xdocField.focus();
-      return $xdocField[0].select();
+      if ($fold.hasClass("out")) {
+        return this.focusAndSelect("#xdoc");
+      }
+    };
+
+    FiddleController.prototype.focusAndSelect = function(field) {
+      var $field;
+      $field = $(field);
+      return window.setTimeout(function() {
+        return $field[0].select();
+      }, 300);
     };
 
     return FiddleController;

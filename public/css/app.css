@@ -63,11 +63,11 @@ fieldset#xml-document {
 }
 fieldset#xml-document .top,
 fieldset#xml-document .bottom {
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: -webkit-transform 0.3s ease;
+  -moz-transition: -webkit-transform 0.3s ease;
+  -ms-transition: -webkit-transform 0.3s ease;
+  -o-transition: -webkit-transform 0.3s ease;
+  transition: -webkit-transform 0.3s ease;
   height: 0;
   margin: 0;
 }

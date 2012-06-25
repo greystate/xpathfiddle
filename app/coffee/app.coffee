@@ -8,9 +8,7 @@ class FiddleController
 	
 	# Focus the XPath field and select its contents
 	setup: () ->
-		$xpathField = $ "#xpath"
-		$xpathField.focus()
-		$xpathField[0].select()
+		@focusAndSelect "#xpath"
 		($ "#toggle").on "click", (e) ->
 			e.preventDefault()
 			app.controller.toggleFold()
@@ -18,10 +16,14 @@ class FiddleController
 	toggleFold: () ->
 		$fold = $ "#xml-document"
 		$fold.toggleClass "out"
-		$xdocField = $ "#xdoc"
-		$xdocField.focus()
-		$xdocField[0].select()
+		@focusAndSelect "#xdoc" if $fold.hasClass "out"
 
+	focusAndSelect: (field) ->
+		$field = $ field
+		window.setTimeout ->
+			$field[0].select()
+		, 300
+		
 # Start everything when the page is ready
 $ ->
 	app.controller = new FiddleController
