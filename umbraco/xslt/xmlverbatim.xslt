@@ -36,7 +36,6 @@
 			<xsl:if test="$matched-nodes[generate-id() = generate-id(current())]"><xsl:text> xpath-match</xsl:text></xsl:if>
 		</xsl:attribute>
 	</xsl:attribute-set>
-
 	<xsl:attribute-set name="element-classes">
 		<xsl:attribute name="class">
 			<xsl:text>xmlverb-element-name</xsl:text>
@@ -51,7 +50,10 @@
 	</xsl:attribute-set>
 	<xsl:attribute-set name="text-classes">
 		<xsl:attribute name="class">
-			<xsl:text>xmlverb-text</xsl:text>
+			<xsl:text>xmlverb-</xsl:text>
+			<xsl:if test="self::comment()">comment</xsl:if>
+			<xsl:if test="self::text()">text</xsl:if>
+			<xsl:if test="self::processing-instruction()">pi-name</xsl:if>
 			<xsl:if test="$matched-nodes[generate-id() = generate-id(current())]"><xsl:text> xpath-match</xsl:text></xsl:if>
 		</xsl:attribute>
 	</xsl:attribute-set>
@@ -204,7 +206,7 @@
 	<!-- comments -->
 	<xsl:template match="comment()" mode="xmlverb">
 		<xsl:text>&lt;!--</xsl:text>
-		<span class="xmlverb-comment">
+		<span xsl:use-attribute-sets="text-classes">
 			<xsl:call-template name="preformatted-output">
 				<xsl:with-param name="text" select="." />
 			</xsl:call-template>
@@ -216,7 +218,7 @@
 	<!-- processing instructions -->
 	<xsl:template match="processing-instruction()" mode="xmlverb">
 		<xsl:text>&lt;?</xsl:text>
-		<span class="xmlverb-pi-name">
+		<span xsl:use-attribute-sets="text-classes">
 			<xsl:value-of select="name()"/>
 		</span>
 		<xsl:if test=".!=''">
