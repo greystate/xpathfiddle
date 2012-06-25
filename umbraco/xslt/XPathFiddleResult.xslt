@@ -22,6 +22,7 @@
 	
 	<xsl:variable name="xpath" select="normalize-space(umb:RequestQueryString('xpath'))" />
 	<xsl:variable name="doc" select="normalize-space(umb:RequestQueryString('xdoc'))" />
+	<xsl:variable name="filterMatched" select="boolean(umb:RequestQueryString('filter') = 1)" />
 	
 	<xsl:variable name="data" select="document(concat($doc, $defaultDoc/doc[not($doc)]))" />
 	<xsl:variable name="matched-nodes" select="ucom:FilterNodes($data, $xpath)" />
@@ -63,10 +64,20 @@
 		<xsl:if test="$data">
 						
 			<div id="results">
-				<xsl:apply-templates select="$data" mode="xmlverb">
-					<xsl:with-param name="indent-elements" select="true()" />
-				</xsl:apply-templates>
-
+				<xsl:if test="$filterMatched"><xsl:attribute name="class">filtered</xsl:attribute></xsl:if>
+				<xsl:choose>
+					<xsl:when test="$filterMatched">
+						<div class="xmlverb-default">
+							<xsl:apply-templates select="$matched-nodes" mode="xmlverb" />
+						</div>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:apply-templates select="$data" mode="xmlverb">
+							<xsl:with-param name="indent-elements" select="true()" />
+						</xsl:apply-templates>				
+					</xsl:otherwise>
+				</xsl:choose>
+				
 				<dl id="stats">
 					<dt># of matches: </dt>
 					<dd><xsl:value-of select="count($matched-nodes)" /></dd>
