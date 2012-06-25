@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<people>
+<people xml:lang="en">
+	<!-- Try selecting the `<note>` element using a `lang('da')` predicate -->
 	<note xml:lang="da">Test af xml:lang attribut</note>
 	<person>
 		<name>Jack Slater</name>
@@ -9,4 +10,9 @@
 		<name>Jack Shepard</name>
 		<email>jack.shepard@4815162342x.com</email>
 	</person>
+	<person pirate="yes">
+		<name>Jack Sparrow</name>
+		<email>jack.sparrow@gmail.com</email>
+	</person>
+	<?xpathfiddle This is just a processing instruction for showing that you can select those too ?>
 </people>
