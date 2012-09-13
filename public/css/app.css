@@ -99,6 +99,11 @@ fieldset#settings {
   width: 15%;
   margin: 0;
 }
+form.error #xpath-expression input {
+  color: #900;
+  background-color: #f5dfdf;
+  border-color: #666;
+}
 .radiobutton {
   overflow: hidden;
   clear: both;
@@ -176,6 +181,9 @@ button[type="submit"] {
   background: #efefef;
   border: 1px solid #ddd;
   position: relative;
+}
+#results.nomatch .xmlverb-default {
+  opacity: 0.3;
 }
 .panel #results {
   width: 75%;
@@ -272,7 +280,7 @@ pre code {
   position: absolute;
   width: 180px;
   min-height: 50px;
-  font-size: 11px;
+  font-size: 16px;
   top: 0;
   right: 0;
   padding: 15px;

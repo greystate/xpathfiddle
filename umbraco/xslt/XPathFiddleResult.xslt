@@ -27,15 +27,23 @@
 	<xsl:variable name="data" select="document(concat($doc, $defaultDoc/doc[not($doc)]))" />
 	<xsl:variable name="matched-nodes" select="ucom:FilterNodes($data, $xpath)" />
 	
+	<xsl:variable name="xpath-error" select="$matched-nodes[descendant-or-self::Exception][normalize-space($xpath)]" />
+	
 	<xsl:template match="/">
 		
 		<form action="{umb:NiceUrl($currentPage/@id)}" id="expression" class="HUD" method="get">
+			<xsl:if test="$xpath-error"><xsl:attribute name="class">HUD error</xsl:attribute></xsl:if>
 			<fieldset id="xpath-expression">
 				<legend>XPath</legend>
 				<label for="xpath">Expression</label>
 				<input id="xpath" name="xpath" type="text" placeholder="Type an expression, e.g.: people/person[2]" tabindex="1">
 					<xsl:if test="$xpath">
-						<xsl:attribute name="value"><xsl:value-of select="$xpath" /></xsl:attribute>
+						<xsl:attribute name="value">
+							<xsl:value-of select="$xpath" />
+							<xsl:if test="$xpath-error">
+								<xsl:value-of select="concat(' &lt;-- ', $xpath-error//Message)" />
+							</xsl:if>
+						</xsl:attribute>
 					</xsl:if>
 				</input>
 			</fieldset>
@@ -64,6 +72,7 @@
 		<xsl:if test="$data">
 						
 			<div id="results">
+				<xsl:if test="not($matched-nodes)"><xsl:attribute name="class">nomatch</xsl:attribute></xsl:if>
 				<xsl:if test="$filterMatched"><xsl:attribute name="class">filtered</xsl:attribute></xsl:if>
 				<xsl:choose>
 					<xsl:when test="$filterMatched">
@@ -74,13 +83,13 @@
 					<xsl:otherwise>
 						<xsl:apply-templates select="$data" mode="xmlverb">
 							<xsl:with-param name="indent-elements" select="true()" />
-						</xsl:apply-templates>				
+						</xsl:apply-templates>
 					</xsl:otherwise>
 				</xsl:choose>
 				
 				<dl id="stats">
 					<dt># of matches: </dt>
-					<dd><xsl:value-of select="count($matched-nodes)" /></dd>
+					<dd><xsl:value-of select="count($matched-nodes) - number(not(normalize-space($xpath)))" /></dd>
 				</dl>
 			</div>
 			

@@ -8,7 +8,7 @@
 </head>
 <body class="pane">
 
-<form action="/" id="expression" class="HUD">
+<form action="/" id="expression" class="error HUD">
 	<fieldset id="xpath-expression">
 		<legend>XPath</legend>
 		<label for="xpath">Expression</label>
@@ -30,7 +30,7 @@
 
 <a href="#" id="toggle">Open</a>
 
-<div id="results">
+<div id="results" class="nomatch">
 <!-- #tminclude "/Users/chriz/Development/lib/tm-support/transform.rb" #xml#="xml/data.xml" #xslt#="xml/xmlverbatim.xsl" -->
 
 <!-- converted by xmlverbatim.xsl 1.1, (c) O. Becker -->
