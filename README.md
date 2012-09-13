@@ -5,7 +5,7 @@ Very much in progress at the moment :-)
 There's a preliminary (static) prototype in `public/index.html` to get a feel for the look.
 You will need to load it from a server (e.g. using [Pow][POW]) though &#8230; - here's a screenshot for you:
 
-![XPath Fiddle Screen 1](assets/xpathfiddle-screen-1.png)
+![XPath Fiddle Screen 1](https://github.com/greystate/xpathfiddle/blob/master/assets/xpathfiddle-screen-1.png?raw=true)
 
 
 Uses a customized version of [XML Verbatim][XMLVERB] for rendering the XML results.
