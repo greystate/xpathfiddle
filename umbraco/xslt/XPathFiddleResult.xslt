@@ -15,16 +15,21 @@
 	<xsl:param name="currentPage" />
 	<xsl:variable name="siteRoot" select="$currentPage/ancestor-or-self::Website" />
 	
-	<xsl:variable name="defaultDocProxy">
+	<xsl:variable name="quot" select="'&quot;'" />
+	<xsl:variable name="apos">'</xsl:variable>
+
+	<!-- Grab QueryString params -->
+	<xsl:variable name="doc" select="normalize-space(umb:RequestQueryString('xdoc'))" />
+	<xsl:variable name="xpath" select="normalize-space(umb:RequestQueryString('xpath'))" />
+	<xsl:variable name="filterMatched" select="boolean(umb:RequestQueryString('filter') = 1)" />
+
+	<xsl:variable name="docsProxy">
+		<doc><xsl:value-of select="translate($doc, concat($quot, $apos), '')" /></doc>
 		<doc>data.xml</doc>
 	</xsl:variable>
-	<xsl:variable name="defaultDoc" select="make:node-set($defaultDocProxy)" />
+	<xsl:variable name="docs" select="make:node-set($docsProxy)/doc" />
 	
-	<xsl:variable name="xpath" select="normalize-space(umb:RequestQueryString('xpath'))" />
-	<xsl:variable name="doc" select="normalize-space(umb:RequestQueryString('xdoc'))" />
-	<xsl:variable name="filterMatched" select="boolean(umb:RequestQueryString('filter') = 1)" />
-	
-	<xsl:variable name="data" select="document(concat($doc, $defaultDoc/doc[not($doc)]))" />
+	<xsl:variable name="data" select="document(concat($docs[not(starts-with(., '../'))][1], ''))" />
 	<xsl:variable name="matched-nodes" select="ucom:FilterNodes($data, $xpath)" />
 	
 	<xsl:variable name="xpath-error" select="$matched-nodes[descendant-or-self::Exception][normalize-space($xpath)]" />
