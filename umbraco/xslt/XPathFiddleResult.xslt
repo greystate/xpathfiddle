@@ -29,7 +29,7 @@
 	</xsl:variable>
 	<xsl:variable name="docs" select="make:node-set($docsProxy)/doc" />
 	
-	<xsl:variable name="data" select="document(concat($docs[not(starts-with(., '../'))][1], ''))" />
+	<xsl:variable name="data" select="document(concat($docs[normalize-space()][not(starts-with(., '../'))][1], ''))" />
 	<xsl:variable name="matched-nodes" select="ucom:FilterNodes($data, $xpath)" />
 	
 	<xsl:variable name="xpath-error" select="$matched-nodes[descendant-or-self::Exception][normalize-space($xpath)]" />
