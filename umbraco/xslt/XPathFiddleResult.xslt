@@ -6,7 +6,7 @@
 	xmlns:ucom="urn:ucomponents.xml"
 	xmlns:xpf="urn:xpath.fiddle"
 	xmlns:make="urn:schemas-microsoft-com:xslt"
-	exclude-result-prefixes="umb ucom make"
+	exclude-result-prefixes="umb ucom make xpf"
 >
 	
 	<xsl:import href="xmlverbatim.xslt" />
