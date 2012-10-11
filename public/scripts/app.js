@@ -12,10 +12,12 @@
 
     FiddleController.prototype.setup = function() {
       this.focusAndSelect("#xpath");
-      return ($("#toggle")).on("click", function(e) {
+      ($("#toggle")).on("click", function(e) {
         e.preventDefault();
         return app.controller.toggleFold();
       });
+      window.key.filter = this.filter;
+      return this.assignKeys();
     };
 
     FiddleController.prototype.toggleFold = function() {
@@ -33,6 +35,19 @@
       return window.setTimeout(function() {
         return $field[0].select();
       }, 300);
+    };
+
+    FiddleController.prototype.assignKeys = function() {
+      return key('[', function() {
+        return console.log('[]');
+      });
+    };
+
+    FiddleController.prototype.filter = function(event) {
+      var tagName;
+      tagName = (event.target || event.srcElement).tagName;
+      console.log(!(tagName === 'SELECT' || tagName === 'TEXTAREA'));
+      return !(tagName === 'SELECT' || tagName === 'TEXTAREA');
     };
 
     return FiddleController;
