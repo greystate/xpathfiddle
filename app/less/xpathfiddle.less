@@ -7,13 +7,19 @@
 	background-color: rgba(255, 240, 30, 0.4);
 }
 
-.filtered .xpath-match {
-	.border-radius(0);
-	.text-shadow(none);
+.filtered {
+	.xpath-match {
+		.border-radius(0);
+		.text-shadow(none);
 	
-	border: none;
-	border-width: 0;
-	background-color: transparent;
+		border: none;
+		border-width: 0;
+		background-color: transparent;
+	}
+	
+	.xmlverb-default > br:first-child {
+		display: none;
+	}
 }
 
 #stats {
