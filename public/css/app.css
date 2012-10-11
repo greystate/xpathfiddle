@@ -475,6 +475,9 @@ pre code {
   border-width: 0;
   background-color: transparent;
 }
+.filtered .xmlverb-default > br:first-child {
+  display: none;
+}
 #stats {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
   color: #999;
