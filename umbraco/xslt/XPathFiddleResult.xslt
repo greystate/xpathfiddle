@@ -4,41 +4,41 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:umb="urn:umbraco.library"
 	xmlns:ucom="urn:ucomponents.xml"
+	xmlns:xpf="urn:xpath.fiddle"
 	xmlns:make="urn:schemas-microsoft-com:xslt"
 	exclude-result-prefixes="umb ucom make"
 >
-
+	
 	<xsl:import href="xmlverbatim.xslt" />
 
 	<xsl:output method="xml" indent="yes" omit-xml-declaration="yes" />
 
 	<xsl:param name="currentPage" />
 	<xsl:variable name="siteRoot" select="$currentPage/ancestor-or-self::Website" />
+	
+	<xsl:variable name="quot" select="'&quot;'" />
+	<xsl:variable name="apos">'</xsl:variable>
 
-	<xsl:variable name="defaultDocProxy">
-		<doc>data.xml</doc>
-	</xsl:variable>
-	<xsl:variable name="defaultDoc" select="make:node-set($defaultDocProxy)" />
-
+	<!-- Grab QueryString params -->
+	<xsl:variable name="doc" select="normalize-space(umb:RequestQueryString('xdoc'))" />
 	<xsl:variable name="xpath" select="normalize-space(umb:RequestQueryString('xpath'))" />
-	<xsl:variable name="doc">
-		<xsl:if test="normalize-space(umb:RequestQueryString('xdoc')) and not(starts-with(umb:RequestQueryString('xdoc'), '..'))">
-			<xsl:value-of select="normalize-space(umb:RequestQueryString('xdoc'))"/>
-		</xsl:if>
-	</xsl:variable>
 	<xsl:variable name="filterMatched" select="boolean(umb:RequestQueryString('filter') = 1)" />
 
-	<xsl:variable name="data" select="document(concat($doc, $defaultDoc/doc[not($doc)]))" />
-	<xsl:variable name="matched-nodes" select="ucom:FilterNodes($data, $xpath)" />
-
+	<xsl:variable name="docsProxy">
+		<doc><xsl:value-of select="translate($doc, concat($quot, $apos), '')" /></doc>
+		<doc>data.xml</doc>
+	</xsl:variable>
+	<xsl:variable name="docs" select="make:node-set($docsProxy)/doc" />
+	
+	<xsl:variable name="data" select="document(concat($docs[normalize-space()][not(starts-with(., '../'))][1], ''))" />
+	<xsl:variable name="matched-nodes" select="xpf:FilterNodes($data, $xpath)" />
+	
 	<xsl:variable name="xpath-error" select="$matched-nodes[descendant-or-self::Exception][normalize-space($xpath)]" />
-
+	
 	<xsl:template match="/">
-
+		
 		<form action="{umb:NiceUrl($currentPage/@id)}" id="expression" class="HUD" method="get">
-			<xsl:if test="$xpath-error">
-				<xsl:attribute name="class">HUD error</xsl:attribute>
-			</xsl:if>
+			<xsl:if test="$xpath-error"><xsl:attribute name="class">HUD error</xsl:attribute></xsl:if>
 			<fieldset id="xpath-expression">
 				<legend>XPath</legend>
 				<label for="xpath">Expression</label>
@@ -59,39 +59,27 @@
 				<label for="xdoc">URL</label>
 				<input class="top" id="xdoc" name="xdoc" type="text" placeholder="URL for the XML document, e.g.: data.xml" tabindex="3">
 					<xsl:if test="$doc">
-						<xsl:attribute name="value">
-							<xsl:value-of select="$doc" />
-						</xsl:attribute>
+						<xsl:attribute name="value"><xsl:value-of select="$doc" /></xsl:attribute>
 					</xsl:if>
 				</input>
 			</fieldset>
 
 			<fieldset id="settings">
 				<legend>Settings</legend>
-				<div class="radiobutton">
-					<input type="radio" name="view" id="view-filter" />
-					<label>Filter</label>
-				</div>
-				<div class="radiobutton">
-					<input type="radio" name="view" id="view-hilite" />
-					<label>Highlight</label>
-				</div>
+				<div class="radiobutton"><input type="radio" name="view" id="view-filter" /><label>Filter</label></div>
+				<div class="radiobutton"><input type="radio" name="view" id="view-hilite" /><label>Highlight</label></div>
 			</fieldset>
-
+			
 			<button type="submit">Go</button>
 		</form>
 
 		<a href="#" id="toggle" tabindex="2">Open</a>
 
 		<xsl:if test="$data">
-
+						
 			<div id="results">
-				<xsl:if test="not($matched-nodes)">
-					<xsl:attribute name="class">nomatch</xsl:attribute>
-				</xsl:if>
-				<xsl:if test="$filterMatched">
-					<xsl:attribute name="class">filtered</xsl:attribute>
-				</xsl:if>
+				<xsl:if test="not($matched-nodes)"><xsl:attribute name="class">nomatch</xsl:attribute></xsl:if>
+				<xsl:if test="$filterMatched"><xsl:attribute name="class">filtered</xsl:attribute></xsl:if>
 				<xsl:choose>
 					<xsl:when test="$filterMatched">
 						<div class="xmlverb-default">
@@ -104,17 +92,15 @@
 						</xsl:apply-templates>
 					</xsl:otherwise>
 				</xsl:choose>
-
+				
 				<dl id="stats">
 					<dt># of matches: </dt>
-					<dd>
-						<xsl:value-of select="count($matched-nodes) - number(not(normalize-space($xpath)))" />
-					</dd>
+					<dd><xsl:value-of select="count($matched-nodes) - number(not(normalize-space($xpath)))" /></dd>
 				</dl>
 			</div>
-
+			
 		</xsl:if>
-
+		
 	</xsl:template>
-
+	
 </xsl:stylesheet>
