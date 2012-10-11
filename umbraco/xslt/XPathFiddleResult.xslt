@@ -4,6 +4,7 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:umb="urn:umbraco.library"
 	xmlns:ucom="urn:ucomponents.xml"
+	xmlns:xpf="urn:xpath.fiddle"
 	xmlns:make="urn:schemas-microsoft-com:xslt"
 	exclude-result-prefixes="umb ucom make"
 >
@@ -30,7 +31,7 @@
 	<xsl:variable name="docs" select="make:node-set($docsProxy)/doc" />
 	
 	<xsl:variable name="data" select="document(concat($docs[normalize-space()][not(starts-with(., '../'))][1], ''))" />
-	<xsl:variable name="matched-nodes" select="ucom:FilterNodes($data, $xpath)" />
+	<xsl:variable name="matched-nodes" select="xpf:FilterNodes($data, $xpath)" />
 	
 	<xsl:variable name="xpath-error" select="$matched-nodes[descendant-or-self::Exception][normalize-space($xpath)]" />
 	
