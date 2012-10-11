@@ -42,7 +42,7 @@
 			<fieldset id="xpath-expression">
 				<legend>XPath</legend>
 				<label for="xpath">Expression</label>
-				<input id="xpath" name="xpath" type="text" placeholder="Type an expression, e.g.: people/person[2]" tabindex="1">
+				<input id="xpath" name="xpath" type="text" placeholder="Type an expression, e.g.: person[2]/name" tabindex="1">
 					<xsl:if test="$xpath">
 						<xsl:attribute name="value">
 							<xsl:value-of select="$xpath" />
