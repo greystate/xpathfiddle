@@ -108,7 +108,9 @@
 					<xsl:choose>
 						<xsl:when test="$filterMatched">
 							<div class="xmlverb-default">
-								<xsl:apply-templates select="$matched-nodes" mode="xmlverb" />
+								<xsl:apply-templates select="$matched-nodes" mode="xmlverb">
+									<xsl:with-param name="indent-elements" select="true()" />
+								</xsl:apply-templates>
 							</div>
 						</xsl:when>
 						<xsl:otherwise>
