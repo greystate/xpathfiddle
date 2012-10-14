@@ -80,21 +80,15 @@
 			<div id="results">
 				<xsl:if test="not($matched-nodes)"><xsl:attribute name="class">nomatch</xsl:attribute></xsl:if>
 				<xsl:if test="$filterMatched"><xsl:attribute name="class">filtered</xsl:attribute></xsl:if>
-				<xsl:choose>
-					<xsl:when test="$filterMatched">
-						<div class="xmlverb-default">
-							<xsl:apply-templates select="$matched-nodes" mode="xmlverb">
-								<xsl:with-param name="indent-elements" select="true()" />
-							</xsl:apply-templates>
-						</div>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:apply-templates select="$data" mode="xmlverb">
-							<xsl:with-param name="indent-elements" select="true()" />
-						</xsl:apply-templates>
-					</xsl:otherwise>
-				</xsl:choose>
-				
+
+				<xsl:apply-templates select="$matched-nodes[$filterMatched]" mode="xmlverb">
+					<xsl:with-param name="indent-elements" select="true()" />
+				</xsl:apply-templates>
+
+				<xsl:apply-templates select="$data[not($filterMatched)]" mode="xmlverb">
+					<xsl:with-param name="indent-elements" select="true()" />
+				</xsl:apply-templates>
+
 				<dl id="stats">
 					<dt># of matches: </dt>
 					<dd><xsl:value-of select="count($matched-nodes) - number(not(normalize-space($xpath)))" /></dd>
