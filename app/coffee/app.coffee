@@ -12,8 +12,7 @@ class FiddleController
 		($ "#toggle").on "click", (e) ->
 			e.preventDefault()
 			app.controller.toggleFold()
-		# Override filter() method in keymaster.js to allow monitoring INPUT 
-		window.key.filter = @filter
+
 		@assignKeys()
 	
 	toggleFold: () ->
@@ -28,14 +27,23 @@ class FiddleController
 		, 300
 
 	assignKeys: () ->
-		key '[', -> console.log '[]'
+		controller = @
+		($ '#xpath').keypress (event) ->
+			console.log document.getSelection().focusOffset
+			switch event.keyCode
+				when 91 # [
+					controller.sendCharacters '[]'
+					event.preventDefault()
+					($ this).trigger($.Event('keydown', keyCode: 37))
+				when 40 # (
+					controller.sendCharacters '()'
+					event.preventDefault()
+			
 
-	# Override for `filter()` in *keymaster.js*
-	filter: (event) ->
-		tagName = (event.target or event.srcElement).tagName
-		console.log !(tagName is 'SELECT' or tagName is 'TEXTAREA')
-		!(tagName is 'SELECT' or tagName is 'TEXTAREA')
-	
+	sendCharacters: (chars) ->
+		oldValue = ($ '#xpath').val()
+		($ '#xpath').val oldValue + chars
+
 # Start everything when the page is ready
 $ ->
 	app.controller = new FiddleController

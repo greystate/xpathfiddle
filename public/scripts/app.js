@@ -16,7 +16,6 @@
         e.preventDefault();
         return app.controller.toggleFold();
       });
-      window.key.filter = this.filter;
       return this.assignKeys();
     };
 
@@ -38,16 +37,28 @@
     };
 
     FiddleController.prototype.assignKeys = function() {
-      return key('[', function() {
-        return console.log('[]');
+      var controller;
+      controller = this;
+      return ($('#xpath')).keypress(function(event) {
+        console.log(document.getSelection().focusOffset);
+        switch (event.keyCode) {
+          case 91:
+            controller.sendCharacters('[]');
+            event.preventDefault();
+            return ($(this)).trigger($.Event('keydown', {
+              keyCode: 37
+            }));
+          case 40:
+            controller.sendCharacters('()');
+            return event.preventDefault();
+        }
       });
     };
 
-    FiddleController.prototype.filter = function(event) {
-      var tagName;
-      tagName = (event.target || event.srcElement).tagName;
-      console.log(!(tagName === 'SELECT' || tagName === 'TEXTAREA'));
-      return !(tagName === 'SELECT' || tagName === 'TEXTAREA');
+    FiddleController.prototype.sendCharacters = function(chars) {
+      var oldValue;
+      oldValue = ($('#xpath')).val();
+      return ($('#xpath')).val(oldValue + chars);
     };
 
     return FiddleController;
