@@ -39,9 +39,9 @@
  */
 var caretPositionAmp;
 
-jQuery.fn.extend({
+Zepto.extend(Zepto.fn, {
 	getSelection: function() {  // function for getting selection, and position of the selected text
-		var input = this.jquery ? this[0] : this;
+		var input = $.zepto.isZ(this) ? this[0] : this;
 		var start;
 		var end;
 		var part;
@@ -123,7 +123,7 @@ jQuery.fn.extend({
 
 	// function for the replacement of the selected text
 	replaceSelection: function(inputStr) {
-		var input = this.jquery ? this[0] : this; 
+		var input = $.zepto.isZ(this) ? this[0] : this; 
 		//part for IE and Opera
 		var start;
 		var end;
@@ -198,7 +198,7 @@ jQuery.fn.extend({
 	
 	// insert text at current caret position
 	insertAtCaretPos: function(inputStr) {
-		var input = this.jquery ? this[0] : this; 
+		var input = $.zepto.isZ(this) ? this[0] : this; 
 		var start;
 		var end;
 		var position;
@@ -297,7 +297,7 @@ jQuery.fn.extend({
 	// Set caret position
 	setCaretPos: function(inputStr) {
 
-		var input = this.jquery ? this[0] : this; 
+		var input = $.zepto.isZ(this) ? this[0] : this; 
 		var s;
 		var re;
 		var position;
@@ -390,7 +390,7 @@ jQuery.fn.extend({
 	
 	
 	countCharacters: function(str) {
-		var input = this.jquery ? this[0] : this;
+		var input = $.zepto.isZ(this) ? this[0] : this;
 		if (input.value.match(/\r/g) != null) {
 			return input.value.length - input.value.match(/\r/g).length;
 		}
@@ -399,7 +399,7 @@ jQuery.fn.extend({
 
 	setMaxLength: function(max, f) {
 		this.each(function() {
-			var input = this.jquery ? this[0] : this;
+			var input = $.zepto.isZ(this) ? this[0] : this;
 			var type = input.type;
 			var isSelected;	
 			var maxCharacters;
