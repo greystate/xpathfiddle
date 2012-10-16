@@ -29,16 +29,20 @@ class FiddleController
 	assignKeys: () ->
 		controller = @
 		($ '#xpath').keypress (event) ->
-			console.log document.getSelection().focusOffset
+			$input = $ this
 			switch event.keyCode
-				when 91 # [
-					controller.sendCharacters '[]'
+				when 39 # '
 					event.preventDefault()
-					($ this).trigger($.Event('keydown', keyCode: 37))
+					$input.insertAtCaretPos "''"
+					$input.setCaretPos 2 + $input.val().indexOf "''"
 				when 40 # (
-					controller.sendCharacters '()'
 					event.preventDefault()
-			
+					$input.insertAtCaretPos '()'
+					$input.setCaretPos 2 + $input.val().indexOf '()'
+				when 91 # [
+					event.preventDefault()
+					$input.insertAtCaretPos '[]'
+					$input.setCaretPos 2 + $input.val().indexOf '[]'
 
 	sendCharacters: (chars) ->
 		oldValue = ($ '#xpath').val()

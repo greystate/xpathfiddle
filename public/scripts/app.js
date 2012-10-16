@@ -40,17 +40,21 @@
       var controller;
       controller = this;
       return ($('#xpath')).keypress(function(event) {
-        console.log(document.getSelection().focusOffset);
+        var $input;
+        $input = $(this);
         switch (event.keyCode) {
-          case 91:
-            controller.sendCharacters('[]');
+          case 39:
             event.preventDefault();
-            return ($(this)).trigger($.Event('keydown', {
-              keyCode: 37
-            }));
+            $input.insertAtCaretPos("''");
+            return $input.setCaretPos(2 + $input.val().indexOf("''"));
           case 40:
-            controller.sendCharacters('()');
-            return event.preventDefault();
+            event.preventDefault();
+            $input.insertAtCaretPos('()');
+            return $input.setCaretPos(2 + $input.val().indexOf('()'));
+          case 91:
+            event.preventDefault();
+            $input.insertAtCaretPos('[]');
+            return $input.setCaretPos(2 + $input.val().indexOf('[]'));
         }
       });
     };
