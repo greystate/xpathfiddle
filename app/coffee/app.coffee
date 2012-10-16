@@ -3,6 +3,15 @@
 
 # Main controller for the page's functions
 class FiddleController
+	# Character pairs to insert automatically
+	# key is keyCode of trigger, value is characters to insert
+	@PAIRS =
+		39 : "''"
+		40 : "()"
+		91 : "[]"
+	# Grab the keyCodes for easier lookup later (+k to make sure they're stored as numbers)
+	@KEYCODES = (+k for k of @PAIRS)
+	
 	constructor: () ->
 		@setup()
 	
@@ -30,20 +39,14 @@ class FiddleController
 		controller = @
 		($ '#xpath').keypress (event) ->
 			$input = $ this
-			switch event.keyCode
-				when 39 # '
-					event.preventDefault()
-					$input.insertAtCaretPos "''"
-					$input.setCaretPos 2 + $input.val().indexOf "''"
-				when 40 # (
-					event.preventDefault()
-					$input.insertAtCaretPos '()'
-					$input.setCaretPos 2 + $input.val().indexOf '()'
-				when 91 # [
-					event.preventDefault()
-					$input.insertAtCaretPos '[]'
-					$input.setCaretPos 2 + $input.val().indexOf '[]'
-
+			code = event.keyCode
+			
+			if code in FiddleController.KEYCODES
+				event.preventDefault()
+				pair = FiddleController.PAIRS[code]
+				$input.insertAtCaretPos pair
+				$input.setCaretPos 2 + $input.val().indexOf pair
+			
 	sendCharacters: (chars) ->
 		oldValue = ($ '#xpath').val()
 		($ '#xpath').val oldValue + chars
