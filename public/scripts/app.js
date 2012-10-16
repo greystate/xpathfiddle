@@ -6,7 +6,7 @@
   this.app = (_ref = window.app) != null ? _ref : {};
 
   FiddleController = (function() {
-    var k;
+    var TABKEY, k;
 
     FiddleController.PAIRS = {
       39: "''",
@@ -22,6 +22,13 @@
       }
       return _results;
     })();
+
+    TABKEY = 9;
+
+    FiddleController.COMPLETIONS = {
+      "pi": "processing-instruction()",
+      "pre": "preceding-sibling::"
+    };
 
     function FiddleController() {
       this.setup();
@@ -56,6 +63,11 @@
     FiddleController.prototype.assignKeys = function() {
       var controller;
       controller = this;
+      ($('#xpath')).keydown(function(event) {
+        if (event.keyCode === TABKEY) {
+          return event.preventDefault();
+        }
+      });
       return ($('#xpath')).keypress(function(event) {
         var $input, code, pair;
         $input = $(this);

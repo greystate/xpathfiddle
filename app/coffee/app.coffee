@@ -12,6 +12,12 @@ class FiddleController
 	# Grab the keyCodes for easier lookup later (+k to make sure they're stored as numbers)
 	@KEYCODES = (+k for k of @PAIRS)
 	
+	# TAB-completions
+	TABKEY = 9
+	@COMPLETIONS =
+		"pi" : "processing-instruction()"
+		"pre" : "preceding-sibling::"
+	
 	constructor: () ->
 		@setup()
 	
@@ -37,6 +43,11 @@ class FiddleController
 
 	assignKeys: () ->
 		controller = @
+		# Handle TAB completions
+		($ '#xpath').keydown (event) ->
+			if event.keyCode is TABKEY
+				event.preventDefault()
+		
 		($ '#xpath').keypress (event) ->
 			$input = $ this
 			code = event.keyCode
