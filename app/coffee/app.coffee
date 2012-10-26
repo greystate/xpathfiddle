@@ -20,6 +20,8 @@ class FiddleController
 		"tex" : "t()"
 		"nod" : "e()"
 		"norm": "alize-space()"
+		"nam" : "e()"
+		"loc" : "al-name()"
 		"for" : "mat-number()"
 		"pre" : "ceding-sibling::"
 		"fol" : "lowing-sibling::"
@@ -28,6 +30,7 @@ class FiddleController
 		"con" : "tains()"
 		"conc": "at()"
 		"not" : "()"
+		"bool": "ean()"
 		"num" : "ber()"
 		"str" : "ing()"
 	
