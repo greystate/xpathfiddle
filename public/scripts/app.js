@@ -63,22 +63,31 @@
     FiddleController.prototype.assignKeys = function() {
       var controller;
       controller = this;
-      ($('#xpath')).keydown(function(event) {
-        if (event.keyCode === TABKEY) {
-          return event.preventDefault();
-        }
-      });
-      return ($('#xpath')).keypress(function(event) {
-        var $input, code, pair;
+      ($('#xpath')).keydown(this.tabCompletion);
+      return ($('#xpath')).keypress(this.smartTypingPairs);
+    };
+
+    FiddleController.prototype.tabCompletion = function(event) {
+      var $input, pos, uptoHere;
+      if (event.keyCode === TABKEY) {
+        event.preventDefault();
         $input = $(this);
-        code = event.keyCode;
-        if (__indexOf.call(FiddleController.KEYCODES, code) >= 0) {
-          event.preventDefault();
-          pair = FiddleController.PAIRS[code];
-          $input.insertAtCaretPos(pair);
-          return $input.setCaretPos(2 + $input.val().indexOf(pair));
-        }
-      });
+        pos = $input.getCaretPos();
+        uptoHere = $input.val().substring(0, pos);
+        return console.log(uptoHere);
+      }
+    };
+
+    FiddleController.prototype.smartTypingPairs = function(event) {
+      var $input, code, pair;
+      $input = $(this);
+      code = event.keyCode;
+      if (__indexOf.call(FiddleController.KEYCODES, code) >= 0) {
+        event.preventDefault();
+        pair = FiddleController.PAIRS[code];
+        $input.insertAtCaretPos(pair);
+        return $input.setCaretPos(2 + $input.val().indexOf(pair));
+      }
     };
 
     FiddleController.prototype.sendCharacters = function(chars) {

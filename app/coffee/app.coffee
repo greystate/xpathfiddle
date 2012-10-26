@@ -44,20 +44,30 @@ class FiddleController
 	assignKeys: () ->
 		controller = @
 		# Handle TAB completions
-		($ '#xpath').keydown (event) ->
-			if event.keyCode is TABKEY
-				event.preventDefault()
+		($ '#xpath').keydown @tabCompletion
 		
-		($ '#xpath').keypress (event) ->
+		# Handle smart typing pairs
+		($ '#xpath').keypress @smartTypingPairs
+	
+	tabCompletion: (event) ->
+		if event.keyCode is TABKEY
+			event.preventDefault()
 			$input = $ this
-			code = event.keyCode
-			
-			if code in FiddleController.KEYCODES
-				event.preventDefault()
-				pair = FiddleController.PAIRS[code]
-				$input.insertAtCaretPos pair
-				$input.setCaretPos 2 + $input.val().indexOf pair
-			
+			pos = $input.getCaretPos()
+			uptoHere = $input.val().substring 0, pos
+			console.log uptoHere
+			# $input.insertAtCaretPos		
+	
+	smartTypingPairs: (event) ->
+		$input = $ this
+		code = event.keyCode
+		
+		if code in FiddleController.KEYCODES
+			event.preventDefault()
+			pair = FiddleController.PAIRS[code]
+			$input.insertAtCaretPos pair
+			$input.setCaretPos 2 + $input.val().indexOf pair		
+	
 	sendCharacters: (chars) ->
 		oldValue = ($ '#xpath').val()
 		($ '#xpath').val oldValue + chars
