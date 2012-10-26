@@ -293,10 +293,22 @@ Zepto.extend(Zepto.fn, {
 		return this;
 	},	
 
+	getCaretPos: function() {
+		var input = $.zepto.isZ(this) ? this[0] : this;
+		if ('selectionStart' in input) {
+			 return input.selectionStart;
+		} else if (document.selection) {
+			// IE
+			input.focus();
+			var sel = document.selection.createRange();
+			var selLen = document.selection.createRange().text.length;
+			sel.moveStart('character', -input.value.length);
+			return sel.text.length - selLen;
+		}
+	},
 	
 	// Set caret position
 	setCaretPos: function(inputStr) {
-
 		var input = $.zepto.isZ(this) ? this[0] : this; 
 		var s;
 		var re;

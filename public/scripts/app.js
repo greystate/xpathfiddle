@@ -6,7 +6,7 @@
   this.app = (_ref = window.app) != null ? _ref : {};
 
   FiddleController = (function() {
-    var k;
+    var TABKEY, k;
 
     FiddleController.PAIRS = {
       39: "''",
@@ -22,6 +22,30 @@
       }
       return _results;
     })();
+
+    TABKEY = 9;
+
+    FiddleController.COMPLETIONS = {
+      "pro": "cessing-instruction()",
+      "com": "ment()",
+      "tex": "t()",
+      "nod": "e()",
+      "norm": "alize-space()",
+      "nam": "e()",
+      "loc": "al-name()",
+      "for": "mat-number()",
+      "pre": "ceding-sibling::",
+      "fol": "lowing-sibling::",
+      "cur": "rrent()",
+      "pos": "ition()",
+      "con": "tains()",
+      "sta": "rts-with()",
+      "conc": "at()",
+      "not": "()",
+      "bool": "ean()",
+      "num": "ber()",
+      "str": "ing()"
+    };
 
     function FiddleController() {
       this.setup();
@@ -56,17 +80,41 @@
     FiddleController.prototype.assignKeys = function() {
       var controller;
       controller = this;
-      return ($('#xpath')).keypress(function(event) {
-        var $input, code, pair;
+      ($('#xpath')).keydown(this.tabCompletion);
+      return ($('#xpath')).keypress(this.smartTypingPairs);
+    };
+
+    FiddleController.prototype.tabCompletion = function(event) {
+      var $input, completion, pos, shortcut, uptoHere, _ref1, _results;
+      if (event.keyCode === TABKEY) {
         $input = $(this);
-        code = event.keyCode;
-        if (__indexOf.call(FiddleController.KEYCODES, code) >= 0) {
-          event.preventDefault();
-          pair = FiddleController.PAIRS[code];
-          $input.insertAtCaretPos(pair);
-          return $input.setCaretPos(2 + $input.val().indexOf(pair));
+        pos = $input.getCaretPos();
+        uptoHere = $input.val().substring(0, pos);
+        _ref1 = FiddleController.COMPLETIONS;
+        _results = [];
+        for (shortcut in _ref1) {
+          completion = _ref1[shortcut];
+          if (uptoHere.slice(-shortcut.length) === shortcut) {
+            event.preventDefault();
+            _results.push($input.insertAtCaretPos(completion));
+          } else {
+            _results.push(void 0);
+          }
         }
-      });
+        return _results;
+      }
+    };
+
+    FiddleController.prototype.smartTypingPairs = function(event) {
+      var $input, code, pair;
+      $input = $(this);
+      code = event.keyCode;
+      if (__indexOf.call(FiddleController.KEYCODES, code) >= 0) {
+        event.preventDefault();
+        pair = FiddleController.PAIRS[code];
+        $input.insertAtCaretPos(pair);
+        return $input.setCaretPos($input.getCaretPos());
+      }
     };
 
     FiddleController.prototype.sendCharacters = function(chars) {
