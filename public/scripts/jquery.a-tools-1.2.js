@@ -309,7 +309,6 @@ Zepto.extend(Zepto.fn, {
 	
 	// Set caret position
 	setCaretPos: function(inputStr) {
-
 		var input = $.zepto.isZ(this) ? this[0] : this; 
 		var s;
 		var re;

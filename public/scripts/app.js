@@ -26,8 +26,21 @@
     TABKEY = 9;
 
     FiddleController.COMPLETIONS = {
-      "pi": "processing-instruction()",
-      "pre": "preceding-sibling::"
+      "pro": "cessing-instruction()",
+      "com": "ment()",
+      "tex": "t()",
+      "nod": "e()",
+      "norm": "alize-space()",
+      "for": "mat-number()",
+      "pre": "ceding-sibling::",
+      "fol": "lowing-sibling::",
+      "cur": "rrent()",
+      "pos": "ition()",
+      "con": "tains()",
+      "conc": "at()",
+      "not": "()",
+      "num": "ber()",
+      "str": "ing()"
     };
 
     function FiddleController() {
@@ -68,13 +81,23 @@
     };
 
     FiddleController.prototype.tabCompletion = function(event) {
-      var $input, pos, uptoHere;
+      var $input, completion, pos, shortcut, uptoHere, _ref1, _results;
       if (event.keyCode === TABKEY) {
-        event.preventDefault();
         $input = $(this);
         pos = $input.getCaretPos();
         uptoHere = $input.val().substring(0, pos);
-        return console.log(uptoHere);
+        _ref1 = FiddleController.COMPLETIONS;
+        _results = [];
+        for (shortcut in _ref1) {
+          completion = _ref1[shortcut];
+          if (uptoHere.slice(-shortcut.length) === shortcut) {
+            event.preventDefault();
+            _results.push($input.insertAtCaretPos(completion));
+          } else {
+            _results.push(void 0);
+          }
+        }
+        return _results;
       }
     };
 

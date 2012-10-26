@@ -15,8 +15,21 @@ class FiddleController
 	# TAB-completions
 	TABKEY = 9
 	@COMPLETIONS =
-		"pi" : "processing-instruction()"
-		"pre" : "preceding-sibling::"
+		"pro" : "cessing-instruction()"
+		"com" : "ment()"
+		"tex" : "t()"
+		"nod" : "e()"
+		"norm": "alize-space()"
+		"for" : "mat-number()"
+		"pre" : "ceding-sibling::"
+		"fol" : "lowing-sibling::"
+		"cur" : "rrent()"
+		"pos" : "ition()"
+		"con" : "tains()"
+		"conc": "at()"
+		"not" : "()"
+		"num" : "ber()"
+		"str" : "ing()"
 	
 	constructor: () ->
 		@setup()
@@ -51,12 +64,18 @@ class FiddleController
 	
 	tabCompletion: (event) ->
 		if event.keyCode is TABKEY
-			event.preventDefault()
 			$input = $ this
 			pos = $input.getCaretPos()
+			# Grab the string from start up to the caret position
 			uptoHere = $input.val().substring 0, pos
-			console.log uptoHere
-			# $input.insertAtCaretPos		
+			# Go through the COMPLETIONS
+			for shortcut, completion of FiddleController.COMPLETIONS
+				# If we have a match for the shortcut
+				if uptoHere[-shortcut.length...] is shortcut
+					# Don't finish the TAB (would exit the input field) 
+					event.preventDefault()
+					# complete the word/function/etc.
+					$input.insertAtCaretPos completion
 	
 	smartTypingPairs: (event) ->
 		$input = $ this
