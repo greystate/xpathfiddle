@@ -112,7 +112,7 @@
         event.preventDefault();
         pair = FiddleController.PAIRS[code];
         $input.insertAtCaretPos(pair);
-        return $input.setCaretPos(-2);
+        return $input.setCaretPos($input.getCaretPos());
       }
     };
 

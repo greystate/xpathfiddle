@@ -88,7 +88,8 @@ class FiddleController
 			event.preventDefault()
 			pair = FiddleController.PAIRS[code]
 			$input.insertAtCaretPos pair
-			$input.setCaretPos -2
+			# looks wrong, but it works...
+			$input.setCaretPos $input.getCaretPos()
 	
 	sendCharacters: (chars) ->
 		oldValue = ($ '#xpath').val()
