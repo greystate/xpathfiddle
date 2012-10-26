@@ -88,7 +88,7 @@ class FiddleController
 			event.preventDefault()
 			pair = FiddleController.PAIRS[code]
 			$input.insertAtCaretPos pair
-			$input.setCaretPos 2 + $input.val().indexOf pair		
+			$input.setCaretPos -2
 	
 	sendCharacters: (chars) ->
 		oldValue = ($ '#xpath').val()
