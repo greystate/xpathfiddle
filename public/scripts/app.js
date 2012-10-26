@@ -39,6 +39,7 @@
       "cur": "rrent()",
       "pos": "ition()",
       "con": "tains()",
+      "sta": "rts-with()",
       "conc": "at()",
       "not": "()",
       "bool": "ean()",
