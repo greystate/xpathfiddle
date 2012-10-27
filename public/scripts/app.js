@@ -38,6 +38,7 @@
       "fol": "lowing-sibling::",
       "anc": "estor-or-self::",
       "des": "cendant-or-self::",
+      "lan": "g()",
       "cur": "rent()",
       "pos": "ition()",
       "con": "tains()",
