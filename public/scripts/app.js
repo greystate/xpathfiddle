@@ -36,6 +36,8 @@
       "for": "mat-number()",
       "pre": "ceding-sibling::",
       "fol": "lowing-sibling::",
+      "anc": "estor-or-self::",
+      "des": "cendant-or-self::",
       "cur": "rent()",
       "pos": "ition()",
       "con": "tains()",
