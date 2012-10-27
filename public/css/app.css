@@ -223,6 +223,11 @@ body {
   padding: 10px;
 }
 form {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
   margin: 0 20px;
 }
 fieldset {
@@ -324,7 +329,7 @@ input[type=text] {
   background: #eee;
   padding: 5px;
 }
-#toggle {
+.doc-toggle {
   text-indent: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -335,6 +340,19 @@ input[type=text] {
   cursor: pointer;
   border-top: 4px double #a4a4a4;
   border-bottom: 4px double #a4a4a4;
+}
+.help-toggle {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  position: absolute;
+  right: 10px;
+  width: 3px;
+  height: 50px;
+  cursor: pointer;
+  border-left: 4px double #a4a4a4;
+  border-right: 4px double #a4a4a4;
 }
 button[type="submit"] {
   height: 0;
@@ -379,7 +397,6 @@ button[type="submit"] {
 .showsettings form {
   width: 75%;
   margin-left: 20%;
-  padding: 0;
 }
 .showhelp #help {
   display: block;
@@ -509,6 +526,7 @@ pre code {
   background: -o-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(100, 90, 0, 0.3));
   background: linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(100, 90, 0, 0.3));
   text-shadow: 0 1px 0 rgba(200, 200, 200, 0.9);
+  position: relative;
   border: 1px solid #fff;
   border-left: none;
   font-size: 12px;
@@ -564,4 +582,20 @@ pre code {
   background: #eee;
   font-family: monospace;
   padding: 0 2px 1px;
+}
+.help-toggle {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  position: absolute;
+  top: 50%;
+  margin-top: -25px;
+  z-index: 10;
+  right: 10px;
+  width: 3px;
+  height: 50px;
+  cursor: pointer;
+  border-left: 4px double #979797;
+  border-right: 4px double #979797;
 }

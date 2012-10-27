@@ -43,6 +43,8 @@ body {
 }
 
 form {
+	.box-sizing(border-box);
+	
 	margin: 0 20px;	
 }
 
@@ -124,7 +126,7 @@ input[type=text] {
 	padding: 5px;
 }
 
-#toggle {
+.doc-toggle {
 	.replaced;
 	
 	width: 50px;
@@ -133,6 +135,18 @@ input[type=text] {
 	cursor: pointer;
 	border-top: 4px double #a4a4a4;
 	border-bottom: 4px double #a4a4a4;
+}
+
+.help-toggle {
+	.replaced;
+
+	position: absolute;
+	right: 10px;
+	width: 3px;
+	height: 50px;
+	cursor: pointer;
+	border-left: 4px double #a4a4a4;
+	border-right: 4px double #a4a4a4;
 }
 
 button[type="submit"] {
@@ -176,7 +190,6 @@ button[type="submit"] {
 	form {
 		width: 75%;
 		margin-left: 20%;
-		padding: 0;
 	}
 }
 
