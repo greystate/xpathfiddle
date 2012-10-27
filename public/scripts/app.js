@@ -53,9 +53,13 @@
 
     FiddleController.prototype.setup = function() {
       this.focusAndSelect("#xpath");
-      ($("#toggle")).on("click", function(e) {
+      ($(".doc-toggle")).on("click", function(e) {
         e.preventDefault();
         return app.controller.toggleFold();
+      });
+      ($(".help-toggle")).on("click", function(e) {
+        e.preventDefault();
+        return app.controller.toggleHelp();
       });
       this.assignKeys();
       return this.renderHelpSheetCompletions();

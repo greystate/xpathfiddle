@@ -41,9 +41,12 @@ class FiddleController
 	# Focus the XPath field and select its contents
 	setup: () ->
 		@focusAndSelect "#xpath"
-		($ "#toggle").on "click", (e) ->
+		($ ".doc-toggle").on "click", (e) ->
 			e.preventDefault()
 			app.controller.toggleFold()
+		($ ".help-toggle").on "click", (e) ->
+			e.preventDefault()
+			app.controller.toggleHelp()
 
 		@assignKeys()
 		@renderHelpSheetCompletions()

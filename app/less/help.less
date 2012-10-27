@@ -30,8 +30,10 @@
 	border: 1px solid #fff;
 	border-left: none;
 
+	.transition(all 0.3s ease);
+	left: -240px;
+
 	font-size: 12px;
-	display: none;
 	float: left;
 	width: 250px;
 	
@@ -64,6 +66,20 @@
 		background: #eee;
 		font-family: monospace;
 		padding: 0 2px 1px;
+	}
+	
+	h1, h2, p, dl {
+		visibility: hidden;
+	}
+}
+
+.showhelp {
+	#help {
+		left: 0;
+		
+		h1, h2, p, dl {
+			visibility: visible;
+		}
 	}
 }
 
