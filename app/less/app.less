@@ -44,7 +44,7 @@ body {
 
 form {
 	.box-sizing(border-box);
-	
+
 	margin: 0 20px;	
 }
 
@@ -55,9 +55,12 @@ fieldset {
 
 	&#xpath-expression {
 		.box-shadow(0, 0, 8px, rgba(0, 0, 0, 0.6));
+		.box-sizing(border-box);
 
 		background: #fff;
 		padding: 10px;
+		width: 100%;
+		margin: 0;
 	}
 	
 	&#xml-document {
@@ -169,15 +172,17 @@ button[type="submit"] {
 	
 }
 
-.showhelp, .showsettings {
-	#results {
-		width: 75%;
-		margin-left: 20%;
-	}
+.application {
+	.transition(all 0.3s ease-out);
+	
+	width: 100%;
+	margin: 0 auto;
+}
 
-	form {
-		width: 75%;
-		margin-left: 20%;
+.showhelp, .showsettings {
+	.application {
+		width: 80%;
+		margin-left: 271px;
 	}
 }
 

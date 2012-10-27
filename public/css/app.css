@@ -242,8 +242,15 @@ fieldset#xpath-expression {
   -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
   -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
   background: #fff;
   padding: 10px;
+  width: 100%;
+  margin: 0;
 }
 fieldset#xml-document {
   -webkit-perspective: 500px;
@@ -375,15 +382,19 @@ button[type="submit"] {
 #results.nomatch .xmlverb-default {
   opacity: 0.3;
 }
-.showhelp #results,
-.showsettings #results {
-  width: 75%;
-  margin-left: 20%;
+.application {
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  width: 100%;
+  margin: 0 auto;
 }
-.showhelp form,
-.showsettings form {
-  width: 75%;
-  margin-left: 20%;
+.showhelp .application,
+.showsettings .application {
+  width: 80%;
+  margin-left: 271px;
 }
 .showsettings #settings {
   display: block;
@@ -510,17 +521,16 @@ pre code {
   background: -o-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(100, 90, 0, 0.3));
   background: linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(100, 90, 0, 0.3));
   text-shadow: 0 1px 0 rgba(200, 200, 200, 0.9);
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
   position: relative;
   border: 1px solid #fff;
   border-left: none;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-  left: -240px;
+  margin-left: -240px;
   font-size: 12px;
-  float: left;
   width: 250px;
   padding: 10px;
 }
@@ -579,7 +589,7 @@ pre code {
   visibility: hidden;
 }
 .showhelp #help {
-  left: 0;
+  margin-left: 0;
 }
 .showhelp #help h1,
 .showhelp #help h2,

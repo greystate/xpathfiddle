@@ -25,16 +25,15 @@
 	.box-shadow(0, 0, 4px, rgba(0, 0, 0, 0.75));
 	.linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(100, 90, 0, 0.3));
 	.text-shadow(0, 1px, 0, rgba(200, 200, 200, 0.9));
+	.transition(all 0.3s ease-out);
 	
 	position: relative;
 	border: 1px solid #fff;
 	border-left: none;
 
-	.transition(all 0.3s ease);
-	left: -240px;
+	margin-left: -240px;
 
 	font-size: 12px;
-	float: left;
 	width: 250px;
 	
 	padding: 10px;
@@ -75,11 +74,15 @@
 
 .showhelp {
 	#help {
-		left: 0;
+		margin-left: 0;
 		
 		h1, h2, p, dl {
 			visibility: visible;
 		}
+	}
+	
+	.application {
+		
 	}
 }
 
