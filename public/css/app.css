@@ -488,17 +488,27 @@ pre code {
   display: inline;
 }
 #help {
-  -webkit-border-radius: 12px;
-  -moz-border-radius: 12px;
-  -ms-border-radius: 12px;
-  -o-border-radius: 12px;
-  border-radius: 12px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border-radius: 8px;
   -webkit-border-bottom-left-radius: 0;
   -webkit-border-top-left-radius: 0;
   -moz-border-bottom-left-radius: 0;
   -moz-border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.75);
+  background: rgba(255, 255, 255, 0.9);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(100, 90, 0, 0.3));
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(100, 90, 0, 0.3));
+  background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(100, 90, 0, 0.3));
+  background: -o-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(100, 90, 0, 0.3));
+  background: linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(100, 90, 0, 0.3));
+  text-shadow: 0 1px 0 rgba(200, 200, 200, 0.9);
   border: 1px solid #fff;
   border-left: none;
   font-size: 12px;
@@ -515,4 +525,43 @@ pre code {
 #help h2 {
   margin: 1em 0 0;
   font-size: 1.1em;
+}
+#help dl {
+  font-family: monospace;
+  margin-left: 10px;
+}
+#help dl::after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+#help dl dt,
+#help dl dd {
+  margin: 0;
+  padding: 0;
+  height: 1.4em;
+  vertical-align: bottom;
+}
+#help dl dt {
+  float: left;
+  width: 25%;
+}
+#help dl dd {
+  float: left;
+  width: 75%;
+}
+#help p {
+  margin-left: 10px;
+}
+#help code {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  background: #eee;
+  font-family: monospace;
+  padding: 0 2px 1px;
 }
