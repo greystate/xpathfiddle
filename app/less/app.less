@@ -29,6 +29,7 @@ body {
 	.linear-gradient(top, #cdcdcd, #a0a0a0);
 	
 	height: 100%;
+	
 }
 
 .HUD {
@@ -166,21 +167,25 @@ button[type="submit"] {
 	
 }
 
-.panel {
+.showhelp, .showsettings {
 	#results {
 		width: 75%;
 		margin-left: 20%;
 	}
 
-	#settings {
-		display: block;
-	}
-	
 	form {
 		width: 75%;
 		margin-left: 20%;
 		padding: 0;
 	}
+}
+
+.showhelp {
+	#help { display: block; }
+}
+
+.showsettings {
+	#settings { display: block; }
 }
 
 pre code { font: monaco, courier, monospace; }
@@ -191,5 +196,6 @@ pre code { font: monaco, courier, monospace; }
 
 @import "xmlverbatim.less";
 @import "xpathfiddle.less";
+@import "help.less";
 
 
