@@ -529,6 +529,7 @@ pre code {
   position: relative;
   border: 1px solid #fff;
   border-left: none;
+  float: left;
   margin-left: -240px;
   font-size: 12px;
   width: 250px;
