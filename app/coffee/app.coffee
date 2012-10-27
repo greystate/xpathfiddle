@@ -25,7 +25,10 @@ class FiddleController
 		"for" : "mat-number()"
 		"pre" : "ceding-sibling::"
 		"fol" : "lowing-sibling::"
-		"cur" : "rrent()"
+		"anc" : "estor-or-self::"
+		"des" : "cendant-or-self::"
+		"lan" : "g()"
+		"cur" : "rent()"
 		"pos" : "ition()"
 		"con" : "tains()"
 		"sta" : "rts-with()"
@@ -41,16 +44,23 @@ class FiddleController
 	# Focus the XPath field and select its contents
 	setup: () ->
 		@focusAndSelect "#xpath"
-		($ "#toggle").on "click", (e) ->
+		($ ".doc-toggle").on "click", (e) ->
 			e.preventDefault()
 			app.controller.toggleFold()
+		($ ".help-toggle").on "click", (e) ->
+			e.preventDefault()
+			app.controller.toggleHelp()
 
 		@assignKeys()
+		@renderHelpSheetCompletions()
 	
 	toggleFold: () ->
 		$fold = $ "#xml-document"
 		$fold.toggleClass "out"
 		@focusAndSelect "#xdoc" if $fold.hasClass "out"
+		
+	toggleHelp: () ->
+		($ 'body').toggleClass "showhelp"
 
 	focusAndSelect: (field) ->
 		$field = $ field
@@ -95,6 +105,12 @@ class FiddleController
 	sendCharacters: (chars) ->
 		oldValue = ($ '#xpath').val()
 		($ '#xpath').val oldValue + chars
+		
+	renderHelpSheetCompletions: ->
+		items = ""
+		items += ("\n<dt>#{shortcut} &#x21E5;</dt>\n<dd>#{shortcut}#{completion}</dd>") for shortcut, completion of FiddleController.COMPLETIONS 
+		list = $ "<h2>TAB completions</h2>\n<dl>#{items}</dl>"
+		($ '#help').append list
 
 # Start everything when the page is ready
 $ ->

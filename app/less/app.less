@@ -1,4 +1,5 @@
 @import "helpers.less";
+@import "normalize.less";
 
 .fold() {
 	-webkit-perspective: 500px;
@@ -24,9 +25,11 @@
 
 html { height: 100%; }
 body {
+	font-family: "Lucida Grande", sans-serif;
 	.linear-gradient(top, #cdcdcd, #a0a0a0);
 	
 	height: 100%;
+	
 }
 
 .HUD {
@@ -40,6 +43,8 @@ body {
 }
 
 form {
+	.box-sizing(border-box);
+
 	margin: 0 20px;	
 }
 
@@ -50,9 +55,12 @@ fieldset {
 
 	&#xpath-expression {
 		.box-shadow(0, 0, 8px, rgba(0, 0, 0, 0.6));
+		.box-sizing(border-box);
 
 		background: #fff;
 		padding: 10px;
+		width: 100%;
+		margin: 0;
 	}
 	
 	&#xml-document {
@@ -121,7 +129,7 @@ input[type=text] {
 	padding: 5px;
 }
 
-#toggle {
+.doc-toggle {
 	.replaced;
 	
 	width: 50px;
@@ -164,21 +172,22 @@ button[type="submit"] {
 	
 }
 
-.panel {
-	#results {
-		width: 75%;
-		margin-left: 20%;
-	}
-
-	#settings {
-		display: block;
-	}
+.application {
+	.transition(all 0.3s ease-out);
 	
-	form {
-		width: 75%;
-		margin-left: 20%;
-		padding: 0;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.showhelp, .showsettings {
+	.application {
+		width: 80%;
+		margin-left: 271px;
 	}
+}
+
+.showsettings {
+	#settings { display: block; }
 }
 
 pre code { font: monaco, courier, monospace; }
@@ -189,5 +198,6 @@ pre code { font: monaco, courier, monospace; }
 
 @import "xmlverbatim.less";
 @import "xpathfiddle.less";
+@import "help.less";
 
 

@@ -36,7 +36,10 @@
       "for": "mat-number()",
       "pre": "ceding-sibling::",
       "fol": "lowing-sibling::",
-      "cur": "rrent()",
+      "anc": "estor-or-self::",
+      "des": "cendant-or-self::",
+      "lan": "g()",
+      "cur": "rent()",
       "pos": "ition()",
       "con": "tains()",
       "sta": "rts-with()",
@@ -53,11 +56,16 @@
 
     FiddleController.prototype.setup = function() {
       this.focusAndSelect("#xpath");
-      ($("#toggle")).on("click", function(e) {
+      ($(".doc-toggle")).on("click", function(e) {
         e.preventDefault();
         return app.controller.toggleFold();
       });
-      return this.assignKeys();
+      ($(".help-toggle")).on("click", function(e) {
+        e.preventDefault();
+        return app.controller.toggleHelp();
+      });
+      this.assignKeys();
+      return this.renderHelpSheetCompletions();
     };
 
     FiddleController.prototype.toggleFold = function() {
@@ -67,6 +75,10 @@
       if ($fold.hasClass("out")) {
         return this.focusAndSelect("#xdoc");
       }
+    };
+
+    FiddleController.prototype.toggleHelp = function() {
+      return ($('body')).toggleClass("showhelp");
     };
 
     FiddleController.prototype.focusAndSelect = function(field) {
@@ -121,6 +133,18 @@
       var oldValue;
       oldValue = ($('#xpath')).val();
       return ($('#xpath')).val(oldValue + chars);
+    };
+
+    FiddleController.prototype.renderHelpSheetCompletions = function() {
+      var completion, items, list, shortcut, _ref1;
+      items = "";
+      _ref1 = FiddleController.COMPLETIONS;
+      for (shortcut in _ref1) {
+        completion = _ref1[shortcut];
+        items += "\n<dt>" + shortcut + " &#x21E5;</dt>\n<dd>" + shortcut + completion + "</dd>";
+      }
+      list = $("<h2>TAB completions</h2>\n<dl>" + items + "</dl>");
+      return ($('#help')).append(list);
     };
 
     return FiddleController;
