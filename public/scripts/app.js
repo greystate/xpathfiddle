@@ -70,6 +70,10 @@
       }
     };
 
+    FiddleController.prototype.toggleHelp = function() {
+      return ($('body')).toggleClass("showhelp");
+    };
+
     FiddleController.prototype.focusAndSelect = function(field) {
       var $field;
       $field = $(field);

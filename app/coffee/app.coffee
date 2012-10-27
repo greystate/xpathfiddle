@@ -52,6 +52,9 @@ class FiddleController
 		$fold = $ "#xml-document"
 		$fold.toggleClass "out"
 		@focusAndSelect "#xdoc" if $fold.hasClass "out"
+		
+	toggleHelp: () ->
+		($ 'body').toggleClass "showhelp"
 
 	focusAndSelect: (field) ->
 		$field = $ field
