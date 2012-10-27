@@ -57,7 +57,8 @@
         e.preventDefault();
         return app.controller.toggleFold();
       });
-      return this.assignKeys();
+      this.assignKeys();
+      return this.renderHelpSheetCompletions();
     };
 
     FiddleController.prototype.toggleFold = function() {
@@ -121,6 +122,18 @@
       var oldValue;
       oldValue = ($('#xpath')).val();
       return ($('#xpath')).val(oldValue + chars);
+    };
+
+    FiddleController.prototype.renderHelpSheetCompletions = function() {
+      var completion, items, list, shortcut, _ref1;
+      items = "";
+      _ref1 = FiddleController.COMPLETIONS;
+      for (shortcut in _ref1) {
+        completion = _ref1[shortcut];
+        items += "\n<dt>" + shortcut + " &#x21E5;</dt>\n<dd>" + shortcut + completion + "</dd>";
+      }
+      list = $("<h2>TAB completions</h2>\n<dl>" + items + "</dl>");
+      return ($('#help')).append(list);
     };
 
     return FiddleController;

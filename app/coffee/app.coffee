@@ -46,6 +46,7 @@ class FiddleController
 			app.controller.toggleFold()
 
 		@assignKeys()
+		@renderHelpSheetCompletions()
 	
 	toggleFold: () ->
 		$fold = $ "#xml-document"
@@ -95,6 +96,12 @@ class FiddleController
 	sendCharacters: (chars) ->
 		oldValue = ($ '#xpath').val()
 		($ '#xpath').val oldValue + chars
+		
+	renderHelpSheetCompletions: ->
+		items = ""
+		items += ("\n<dt>#{shortcut} &#x21E5;</dt>\n<dd>#{shortcut}#{completion}</dd>") for shortcut, completion of FiddleController.COMPLETIONS 
+		list = $ "<h2>TAB completions</h2>\n<dl>#{items}</dl>"
+		($ '#help').append list
 
 # Start everything when the page is ready
 $ ->
