@@ -36,7 +36,7 @@
       "for": "mat-number()",
       "pre": "ceding-sibling::",
       "fol": "lowing-sibling::",
-      "cur": "rrent()",
+      "cur": "rent()",
       "pos": "ition()",
       "con": "tains()",
       "sta": "rts-with()",
