@@ -11,10 +11,12 @@ class FiddleController
 		91 : "[]"
 	# Grab the keyCodes for easier lookup later (+k to make sure they're stored as numbers)
 	@KEYCODES = (+k for k of @PAIRS)
-	
-	# TAB-completions
+
 	TABKEY = 9
 	HELPKEY = 63
+	XPATHKEY = 120 # x
+
+	# TAB-completions
 	@COMPLETIONS =
 		# Node types
 		"pro" : "cessing-instruction()"
@@ -88,6 +90,7 @@ class FiddleController
 
 		# Handle smart typing pairs and general shortcuts
 		($ '#xpath').keypress @handleKeypress
+		($ 'body').keypress @generalShortcut
 
 	tabCompletion: (event) ->
 		if event.keyCode is TABKEY
@@ -105,22 +108,27 @@ class FiddleController
 					$input.insertAtCaretPos completion
 
 	#### Keyboard Shortcuts
-	# * Typing `?` in the XPath field toggles the Help Sheet
+	# * `?` - toggle the Help Sheet
+	# * `x` - focus the XPath field
+	generalShortcut: (event) ->
+		switch event.keyCode
+			when HELPKEY
+				event.preventDefault()
+				app.controller.toggleHelp()
+			when XPATHKEY
+				app.controller.focusAndSelect '#xpath' unless event.target.id is 'xpath'
+
 	# * `[`, `(` and `'` will trigger insertion of the corresponding `]`, `)` or `'` to complete the pair
 	handleKeypress: (event) ->
-		if event.keyCode is HELPKEY
+		$input = $ this
+		code = event.keyCode
+
+		if code in FiddleController.KEYCODES
 			event.preventDefault()
-			app.controller.toggleHelp()
-		else
-			$input = $ this
-			code = event.keyCode
-		
-			if code in FiddleController.KEYCODES
-				event.preventDefault()
-				pair = FiddleController.PAIRS[code]
-				$input.insertAtCaretPos pair
-				# looks wrong, but it works...
-				$input.setCaretPos $input.getCaretPos()
+			pair = FiddleController.PAIRS[code]
+			$input.insertAtCaretPos pair
+			# looks wrong, but it works...
+			$input.setCaretPos $input.getCaretPos()
 	
 	sendCharacters: (chars) ->
 		oldValue = ($ '#xpath').val()
