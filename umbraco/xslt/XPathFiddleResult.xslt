@@ -16,6 +16,8 @@
 	<xsl:param name="currentPage" />
 	<xsl:variable name="siteRoot" select="$currentPage/ancestor-or-self::Website" />
 	
+	<xsl:variable name="debug" select="false()" />
+	
 	<xsl:variable name="quot" select="'&quot;'" />
 	<xsl:variable name="apos">'</xsl:variable>
 	<xsl:variable name="errorFlag" select="' &lt;-- '" />
@@ -139,6 +141,13 @@
 				the matching character after it.
 			</p>
 		</section>		
+	<xsl:template name="debug">
+		<xsl:if test="$debug">
+			<textarea rows="8" cols="40">
+				<xsl:comment>$matched-nodes</xsl:comment>
+				<xsl:copy-of select="$matched-nodes" />
+			</textarea>
+		</xsl:if>
 	</xsl:template>
 	
 </xsl:stylesheet>
