@@ -570,6 +570,9 @@ pre code {
   float: left;
   width: 75%;
 }
+#help dl.general dd {
+  font-family: "Lucida Grande", sans-serif;
+}
 #help p {
   margin-left: 10px;
 }
