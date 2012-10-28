@@ -25,7 +25,15 @@ namespace XPathFiddle
 						manager.AddNamespace(ns.Key, ns.Value);
 					}
 
-					return (XPathNodeIterator)nav.Evaluate(xpath, manager);
+					var result = nav.Evaluate(xpath, manager);
+					if (result is XPathNodeIterator) {
+						return (XPathNodeIterator)result;
+					} else { // (result is String) {
+						XmlDocument doc = new XmlDocument();
+//						doc.LoadXml("<result expression=\"" + xpath + "\">" + result + "</result>");
+						doc.LoadXml("<result expression=\"count(*)\">5</result>");
+						return (XPathNodeIterator)doc.DocumentElement.FirstChild.CreateNavigator().Evaluate(".");
+					}
 				}
 			}
 			catch (Exception ex)
