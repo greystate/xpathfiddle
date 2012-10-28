@@ -18,6 +18,7 @@
 	
 	<xsl:variable name="quot" select="'&quot;'" />
 	<xsl:variable name="apos">'</xsl:variable>
+	<xsl:variable name="errorFlag" select="' &lt;-- '" />
 
 	<!-- Grab QueryString params -->
 	<xsl:variable name="doc" select="normalize-space(umb:RequestQueryString('xdoc'))" />
@@ -31,9 +32,19 @@
 	<xsl:variable name="docs" select="make:node-set($docsProxy)/doc" />
 	
 	<xsl:variable name="data" select="document(concat($docs[normalize-space()][not(starts-with(., '../'))][1], ''))" />
-	<xsl:variable name="matched-nodes" select="xpf:FilterNodes($data, $xpath)" />
+	<xsl:variable name="xpathSend">
+		<xsl:choose>
+			<xsl:when test="contains($xpath, $errorFlag)">
+				<xsl:value-of select="substring-before($xpath, $errorFlag)" />
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$xpath" />
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="matched-nodes" select="xpf:FilterNodes($data, $xpathSend)" />
 	
-	<xsl:variable name="xpath-error" select="$matched-nodes[descendant-or-self::Exception][normalize-space($xpath)]" />
+	<xsl:variable name="xpath-error" select="$matched-nodes[descendant-or-self::Exception][normalize-space($xpathSend)]" />
 	
 	<xsl:template match="/">
 		
@@ -47,11 +58,11 @@
 					<legend>XPath</legend>
 					<label for="xpath">Expression</label>
 					<input id="xpath" name="xpath" type="text" placeholder="Type an expression, e.g.: person[2]/name" tabindex="1">
-						<xsl:if test="$xpath">
+						<xsl:if test="$xpathSend">
 							<xsl:attribute name="value">
-								<xsl:value-of select="$xpath" />
+								<xsl:value-of select="$xpathSend" />
 								<xsl:if test="$xpath-error">
-									<xsl:value-of select="concat(' &lt;-- ', $xpath-error//Message)" />
+									<xsl:value-of select="concat($errorFlag, $xpath-error//Message)" />
 								</xsl:if>
 							</xsl:attribute>
 						</xsl:if>
@@ -99,7 +110,7 @@
 				
 					<dl id="stats">
 						<dt># of matches: </dt>
-						<dd><xsl:value-of select="count($matched-nodes) - number(not(normalize-space($xpath)))" /></dd>
+						<dd><xsl:value-of select="count($matched-nodes) - number(not(normalize-space($xpathSend)))" /></dd>
 					</dl>
 				</div>
 			
