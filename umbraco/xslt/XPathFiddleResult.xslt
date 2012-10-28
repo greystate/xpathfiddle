@@ -106,7 +106,7 @@
 					<xsl:if test="not($matched-nodes)"><xsl:attribute name="class">nomatch</xsl:attribute></xsl:if>
 					<xsl:if test="$filterMatched"><xsl:attribute name="class">filtered</xsl:attribute></xsl:if>
 					<xsl:choose>
-						<xsl:when test="$filterMatched">
+						<xsl:when test="$filterMatched or $xpath-value">
 							<div class="xmlverb-default">
 								<xsl:apply-templates select="$matched-nodes" mode="xmlverb" />
 							</div>
@@ -121,6 +121,8 @@
 					<dl id="stats">
 						<dt># of matches: </dt>
 						<dd><xsl:value-of select="count($matched-nodes) - number(not(normalize-space($xpathSend)))" /></dd>
+						<dt>value? :</dt>
+						<dd><xsl:value-of select="$xpath-value" /></dd>
 					</dl>
 				</div>
 			
