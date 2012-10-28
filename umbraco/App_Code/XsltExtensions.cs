@@ -28,11 +28,10 @@ namespace XPathFiddle
 					var result = nav.Evaluate(xpath, manager);
 					if (result is XPathNodeIterator) {
 						return (XPathNodeIterator)result;
-					} else { // (result is String) {
+					} else {
 						XmlDocument doc = new XmlDocument();
-//						doc.LoadXml("<result expression=\"" + xpath + "\">" + result + "</result>");
-						doc.LoadXml("<result expression=\"count(*)\">5</result>");
-						return (XPathNodeIterator)doc.DocumentElement.FirstChild.CreateNavigator().Evaluate(".");
+						doc.LoadXml("<result expression=\"" + xpath + "\">" + result.ToString() + "</result>");
+						return (XPathNodeIterator)doc.DocumentElement.CreateNavigator().Evaluate("/result");
 					}
 				}
 			}
