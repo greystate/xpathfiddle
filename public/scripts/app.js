@@ -6,7 +6,7 @@
   this.app = (_ref = window.app) != null ? _ref : {};
 
   FiddleController = (function() {
-    var TABKEY, k;
+    var HELPKEY, TABKEY, k;
 
     FiddleController.PAIRS = {
       39: "''",
@@ -24,6 +24,8 @@
     })();
 
     TABKEY = 9;
+
+    HELPKEY = 63;
 
     FiddleController.COMPLETIONS = {
       "pro": "cessing-instruction()",
@@ -93,7 +95,7 @@
       var controller;
       controller = this;
       ($('#xpath')).keydown(this.tabCompletion);
-      return ($('#xpath')).keypress(this.smartTypingPairs);
+      return ($('#xpath')).keypress(this.handleKeypress);
     };
 
     FiddleController.prototype.tabCompletion = function(event) {
@@ -117,15 +119,20 @@
       }
     };
 
-    FiddleController.prototype.smartTypingPairs = function(event) {
+    FiddleController.prototype.handleKeypress = function(event) {
       var $input, code, pair;
-      $input = $(this);
-      code = event.keyCode;
-      if (__indexOf.call(FiddleController.KEYCODES, code) >= 0) {
+      if (event.keyCode === HELPKEY) {
         event.preventDefault();
-        pair = FiddleController.PAIRS[code];
-        $input.insertAtCaretPos(pair);
-        return $input.setCaretPos($input.getCaretPos());
+        return app.controller.toggleHelp();
+      } else {
+        $input = $(this);
+        code = event.keyCode;
+        if (__indexOf.call(FiddleController.KEYCODES, code) >= 0) {
+          event.preventDefault();
+          pair = FiddleController.PAIRS[code];
+          $input.insertAtCaretPos(pair);
+          return $input.setCaretPos($input.getCaretPos());
+        }
       }
     };
 
