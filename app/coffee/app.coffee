@@ -16,28 +16,40 @@ class FiddleController
 	TABKEY = 9
 	HELPKEY = 63
 	@COMPLETIONS =
+		# Node types
 		"pro" : "cessing-instruction()"
 		"com" : "ment()"
 		"tex" : "t()"
 		"nod" : "e()"
-		"norm": "alize-space()"
-		"nam" : "e()"
-		"loc" : "al-name()"
-		"for" : "mat-number()"
+		"cur" : "rent()"
+		# Axes
 		"pre" : "ceding-sibling::"
 		"fol" : "lowing-sibling::"
 		"anc" : "estor-or-self::"
 		"des" : "cendant-or-self::"
-		"lan" : "g()"
-		"cur" : "rent()"
-		"pos" : "ition()"
+		# String functions
+		"norm": "alize-space()"
+		"nam" : "e()"
+		"loc" : "al-name()"
+		"str" : "ing()"
 		"con" : "tains()"
 		"sta" : "rts-with()"
 		"conc": "at()"
+		"for" : "mat-number()"
+		# Numeric functions
+		"pos" : "ition()"
+		"cou" : "nt()"
+		"cei" : "ling()"
+		"flo" : "or()"
+		"rou" : "nd()"
+		"num" : "ber()"
+		# Boolean functions
+		"lan" : "g()"
+		"las" : "t()"
 		"not" : "()"
 		"bool": "ean()"
-		"num" : "ber()"
-		"str" : "ing()"
+		"tru" : "e()"
+		"fal" : "se()"
 	
 	constructor: () ->
 		@setup()
