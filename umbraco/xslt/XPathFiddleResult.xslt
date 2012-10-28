@@ -125,6 +125,11 @@
 				<h1>Help Sheet</h1>
 				<a href="?showhelp=yes" class="toggle help-toggle">Help</a>
 			</header>
+			<h2>Shortcuts</h2>
+			<dl class="general">
+				<dt><code>?</code></dt>
+				<dd>Open this sheet</dd>
+			</dl>
 			<h2>Auto pairs</h2>
 			<p>
 				Typing <code>(</code>, <code>[</code> or <code>'</code> will automatically insert
