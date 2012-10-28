@@ -45,6 +45,7 @@
 	<xsl:variable name="matched-nodes" select="xpf:FilterNodes($data, $xpathSend)" />
 	
 	<xsl:variable name="xpath-error" select="$matched-nodes[descendant-or-self::Exception][normalize-space($xpathSend)]" />
+	<xsl:variable name="xpath-value" select="$matched-nodes[descendant-or-self::result[@expression]]" />
 	
 	<xsl:template match="/">
 		
@@ -96,7 +97,7 @@
 					<xsl:if test="not($matched-nodes)"><xsl:attribute name="class">nomatch</xsl:attribute></xsl:if>
 					<xsl:if test="$filterMatched"><xsl:attribute name="class">filtered</xsl:attribute></xsl:if>
 					<xsl:choose>
-						<xsl:when test="$filterMatched">
+						<xsl:when test="$filterMatched or $xpath-value">
 							<div class="xmlverb-default">
 								<xsl:apply-templates select="$matched-nodes" mode="xmlverb" />
 							</div>
@@ -111,6 +112,8 @@
 					<dl id="stats">
 						<dt># of matches: </dt>
 						<dd><xsl:value-of select="count($matched-nodes) - number(not(normalize-space($xpathSend)))" /></dd>
+						<dt>value? :</dt>
+						<dd><xsl:value-of select="$xpath-value" /></dd>
 					</dl>
 				</div>
 			
