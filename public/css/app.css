@@ -590,7 +590,13 @@ pre code {
 #help h2,
 #help p,
 #help dl {
-  visibility: hidden;
+  -webkit-transition: opacity 0.3s ease-out;
+  -moz-transition: opacity 0.3s ease-out;
+  -ms-transition: opacity 0.3s ease-out;
+  -o-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
+  -webkit-transform: translatez(0);
+  opacity: 0;
 }
 .showhelp #help {
   margin-left: 0;
@@ -599,7 +605,7 @@ pre code {
 .showhelp #help h2,
 .showhelp #help p,
 .showhelp #help dl {
-  visibility: visible;
+  opacity: 1;
 }
 .help-toggle {
   text-indent: 100%;

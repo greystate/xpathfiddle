@@ -72,7 +72,10 @@
 	}
 	
 	h1, h2, p, dl {
-		visibility: hidden;
+		.transition(opacity 0.3s ease-out);
+		.accelerate;
+	
+		opacity: 0;
 	}
 }
 
@@ -81,7 +84,7 @@
 		margin-left: 0;
 		
 		h1, h2, p, dl {
-			visibility: visible;
+			opacity: 1;
 		}
 	}
 	
