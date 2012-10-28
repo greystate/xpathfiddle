@@ -14,6 +14,7 @@ class FiddleController
 	
 	# TAB-completions
 	TABKEY = 9
+	HELPKEY = 63
 	@COMPLETIONS =
 		"pro" : "cessing-instruction()"
 		"com" : "ment()"
@@ -72,10 +73,10 @@ class FiddleController
 		controller = @
 		# Handle TAB completions
 		($ '#xpath').keydown @tabCompletion
-		
-		# Handle smart typing pairs
-		($ '#xpath').keypress @smartTypingPairs
-	
+
+		# Handle smart typing pairs and general shortcuts
+		($ '#xpath').keypress @handleKeypress
+
 	tabCompletion: (event) ->
 		if event.keyCode is TABKEY
 			$input = $ this
@@ -90,17 +91,24 @@ class FiddleController
 					event.preventDefault()
 					# complete the word/function/etc.
 					$input.insertAtCaretPos completion
-	
-	smartTypingPairs: (event) ->
-		$input = $ this
-		code = event.keyCode
-		
-		if code in FiddleController.KEYCODES
+
+	#### Keyboard Shortcuts
+	# * Typing `?` in the XPath field toggles the Help Sheet
+	# * `[`, `(` and `'` will trigger insertion of the corresponding `]`, `)` or `'` to complete the pair
+	handleKeypress: (event) ->
+		if event.keyCode is HELPKEY
 			event.preventDefault()
-			pair = FiddleController.PAIRS[code]
-			$input.insertAtCaretPos pair
-			# looks wrong, but it works...
-			$input.setCaretPos $input.getCaretPos()
+			app.controller.toggleHelp()
+		else
+			$input = $ this
+			code = event.keyCode
+		
+			if code in FiddleController.KEYCODES
+				event.preventDefault()
+				pair = FiddleController.PAIRS[code]
+				$input.insertAtCaretPos pair
+				# looks wrong, but it works...
+				$input.setCaretPos $input.getCaretPos()
 	
 	sendCharacters: (chars) ->
 		oldValue = ($ '#xpath').val()
