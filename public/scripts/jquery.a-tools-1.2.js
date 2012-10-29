@@ -470,5 +470,25 @@ Zepto.extend(Zepto.fn, {
 			} else { return this; }
 		})
 		return this;
+	},
+	
+	setSelection: function(start, end) {
+		var input = $.zepto.isZ(this) ? this[0] : this;
+		if ('createTextRange' in input) {
+			/*	IE calculates the end of selection range based 
+				from the starting point.
+				Other browsers will calculate end of selection from
+				the beginning of given text node. */
+			var newend = end - start;
+			var selRange = input.createTextRange();
+			selRange.collapse(true);
+			selRange.moveStart("character", start);
+			selRange.moveEnd("character", newend);
+			selRange.select();
+		} else if ('setSelectionRange' in input) {
+			/* For the other browsers */
+			input.setSelectionRange(start, end);
+		}
+		input.focus();
 	}
 }); 
