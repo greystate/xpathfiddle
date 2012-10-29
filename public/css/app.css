@@ -569,6 +569,7 @@ pre code {
 #help dl dd {
   float: left;
   width: 75%;
+  white-space: nowrap;
 }
 #help dl.general dd {
   font-family: "Lucida Grande", sans-serif;
