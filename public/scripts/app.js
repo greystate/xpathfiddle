@@ -69,7 +69,7 @@
     }
 
     FiddleController.prototype.setup = function() {
-      this.focusAndSelect("#xpath");
+      this.focusAndSelect('#xpath');
       ($(".doc-toggle")).on("click", function(e) {
         e.preventDefault();
         return app.controller.toggleFold();
@@ -84,10 +84,10 @@
 
     FiddleController.prototype.toggleFold = function() {
       var $fold;
-      $fold = $("#xml-document");
+      $fold = $('#xml-document');
       $fold.toggleClass("out");
       if ($fold.hasClass("out")) {
-        return this.focusAndSelect("#xdoc");
+        return this.focusAndSelect('#xdoc');
       }
     };
 
@@ -96,10 +96,11 @@
     };
 
     FiddleController.prototype.focusAndSelect = function(field) {
-      var $field;
+      var $field,
+        _this = this;
       $field = $(field);
       return window.setTimeout(function() {
-        return $field[0].select();
+        return _this.ignoreInfoInXPathExpression();
       }, 300);
     };
 
@@ -169,9 +170,7 @@
       infoRE = /\s(=>|<--)\s/;
       $input = $('#xpath');
       check = $input.val().match(infoRE);
-      if (check) {
-        return $input.setSelection(0, check.index);
-      }
+      return $input.setSelection(0, check ? check.index : $input.val().length);
     };
 
     FiddleController.prototype.renderHelpSheetCompletions = function() {

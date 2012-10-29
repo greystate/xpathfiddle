@@ -61,7 +61,7 @@ class FiddleController
 	
 	# Focus the XPath field and select its contents
 	setup: () ->
-		@focusAndSelect "#xpath"
+		@focusAndSelect '#xpath'
 		($ ".doc-toggle").on "click", (e) ->
 			e.preventDefault()
 			app.controller.toggleFold()
@@ -73,17 +73,17 @@ class FiddleController
 		@renderHelpSheetCompletions()
 	
 	toggleFold: () ->
-		$fold = $ "#xml-document"
+		$fold = $ '#xml-document'
 		$fold.toggleClass "out"
-		@focusAndSelect "#xdoc" if $fold.hasClass "out"
+		@focusAndSelect '#xdoc' if $fold.hasClass "out"
 		
 	toggleHelp: () ->
 		($ 'body').toggleClass "showhelp"
 
 	focusAndSelect: (field) ->
 		$field = $ field
-		window.setTimeout ->
-			$field[0].select()
+		window.setTimeout =>
+			@ignoreInfoInXPathExpression()
 		, 300
 
 	assignKeys: () ->
@@ -157,8 +157,8 @@ class FiddleController
 		///
 		$input = $ '#xpath'
 		check = $input.val().match infoRE
-		if check
-			$input.setSelection 0, check.index
+		$input.setSelection 0, if check then check.index else $input.val().length
+			
 		
 	renderHelpSheetCompletions: ->
 		items = ""
