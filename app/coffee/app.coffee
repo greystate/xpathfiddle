@@ -106,6 +106,8 @@ class FiddleController
 					event.preventDefault()
 					# complete the word/function/etc.
 					$input.insertAtCaretPos completion
+					# don't apply any other completions 
+					break
 
 	#### Keyboard Shortcuts
 	# * `?` - toggle the Help Sheet

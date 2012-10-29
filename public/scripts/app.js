@@ -121,6 +121,8 @@
           if (uptoHere.slice(-shortcut.length) === shortcut) {
             event.preventDefault();
             _results.push($input.insertAtCaretPos(completion));
+            $input.insertAtCaretPos(completion);
+            break;
           } else {
             _results.push(void 0);
           }
