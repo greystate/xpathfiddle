@@ -4,6 +4,8 @@
  * Copyright (c) 2009 Andrey Kramarev, Ampparit Inc. (www.ampparit.com)
  * Licensed under the MIT license.
  * http://www.ampparit.fi/a-tools/license.txt
+ * 
+ * Modifications 2012 by Chriztian Steinmeier, Vokseværk (vokseverk.dk)
  *
  * Basic usage:
  
@@ -296,14 +298,14 @@ Zepto.extend(Zepto.fn, {
 	getCaretPos: function() {
 		var input = $.zepto.isZ(this) ? this[0] : this;
 		if ('selectionStart' in input) {
-			 return input.selectionStart;
+			 return input.selectionStart + 1;
 		} else if (document.selection) {
 			// IE
 			input.focus();
 			var sel = document.selection.createRange();
 			var selLen = document.selection.createRange().text.length;
 			sel.moveStart('character', -input.value.length);
-			return sel.text.length - selLen;
+			return (sel.text.length - selLen) + 1;
 		}
 	},
 	
