@@ -165,8 +165,13 @@
     };
 
     FiddleController.prototype.ignoreInfoInXPathExpression = function() {
-      var $input;
-      return $input = $('#xpath');
+      var $input, check, infoRE;
+      infoRE = /\s(=>|<--)\s/;
+      $input = $('#xpath');
+      check = $input.val().match(infoRE);
+      if (check) {
+        return $input.setSelection(0, check.index);
+      }
     };
 
     FiddleController.prototype.renderHelpSheetCompletions = function() {

@@ -143,9 +143,22 @@ class FiddleController
 			# Place caret inside the pair
 			$input.setCaretPos $input.getCaretPos() - 1
 
-	# Set the selected part of the XPath expression, ignoring errormessages and value results
+	# Set the selected part of the XPath expression, ignoring errormessages and value results,
+	# to make it even easier to fix errors and explore further
 	ignoreInfoInXPathExpression: () ->
+		infoRE = ///
+			\s		# whitespace
+			(
+			=>		# value identifier
+			|		# or...
+			<--		# error identifier
+			)
+			\s		#whitespace	
+		///
 		$input = $ '#xpath'
+		check = $input.val().match infoRE
+		if check
+			$input.setSelection 0, check.index
 		
 	renderHelpSheetCompletions: ->
 		items = ""
