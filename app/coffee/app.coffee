@@ -118,9 +118,11 @@ class FiddleController
 	generalShortcut: (event) ->
 		switch event.keyCode
 			when HELPKEY
+				# Don't let the character output to XPath field
 				event.preventDefault()
 				app.controller.toggleHelp()
 			when XPATHKEY
+				# Only focus the field if we're not in it, otherwise we let the character output
 				app.controller.focusAndSelect '#xpath' unless event.target.id is 'xpath'
 
 	# * `[`, `(` and `'` will trigger insertion of the corresponding `]`, `)` or `'` to complete the pair
