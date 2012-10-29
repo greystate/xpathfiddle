@@ -29,13 +29,16 @@ class FiddleController
 		"fol" : "lowing-sibling::"
 		"anc" : "estor-or-self::"
 		"des" : "cendant-or-self::"
+		"par" : "ent::"
 		# String functions
 		"norm": "alize-space()"
+		"gen" : "erate-id()"
 		"nam" : "e()"
 		"loc" : "al-name()"
 		"str" : "ing()"
 		"con" : "tains()"
 		"sta" : "rts-with()"
+		"tr"  : "anslate()"
 		"conc": "at()"
 		"for" : "mat-number()"
 		# Numeric functions

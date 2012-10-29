@@ -39,12 +39,15 @@
       "fol": "lowing-sibling::",
       "anc": "estor-or-self::",
       "des": "cendant-or-self::",
+      "par": "ent::",
       "norm": "alize-space()",
+      "gen": "erate-id()",
       "nam": "e()",
       "loc": "al-name()",
       "str": "ing()",
       "con": "tains()",
       "sta": "rts-with()",
+      "tr": "anslate()",
       "conc": "at()",
       "for": "mat-number()",
       "pos": "ition()",
@@ -120,7 +123,6 @@
           completion = _ref1[shortcut];
           if (uptoHere.slice(-shortcut.length) === shortcut) {
             event.preventDefault();
-            _results.push($input.insertAtCaretPos(completion));
             $input.insertAtCaretPos(completion);
             break;
           } else {
