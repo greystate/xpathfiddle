@@ -100,7 +100,7 @@ class FiddleController
 			$input = $ this
 			pos = $input.getCaretPos()
 			# Grab the string from start up to the caret position
-			uptoHere = $input.val().substring 0, pos
+			uptoHere = $input.val().substring 0, pos - 1
 			# Go through the COMPLETIONS
 			for shortcut, completion of FiddleController.COMPLETIONS
 				# If we have a match for the shortcut
@@ -108,7 +108,13 @@ class FiddleController
 					# Don't finish the TAB (would exit the input field) 
 					event.preventDefault()
 					# complete the word/function/etc.
-					$input.insertAtCaretPos completion
+					$input.insertAtCaretPos completion.replace '|', ''
+					caretPos = $input.getCaretPos()
+					caretPosInCompletion = completion.indexOf('|')
+					if caretPosInCompletion >= 0
+						$input.setCaretPos caretPos - (completion.length - caretPosInCompletion) + 1
+					else
+						$input.setCaretPos caretPos
 					# don't apply any other completions 
 					break
 
@@ -134,16 +140,16 @@ class FiddleController
 			event.preventDefault()
 			pair = FiddleController.PAIRS[code]
 			$input.insertAtCaretPos pair
-			# looks wrong, but it works...
-			$input.setCaretPos $input.getCaretPos()
-	
-	sendCharacters: (chars) ->
-		oldValue = ($ '#xpath').val()
-		($ '#xpath').val oldValue + chars
+			# Place caret inside the pair
+			$input.setCaretPos $input.getCaretPos() - 1
+
+	# Set the selected part of the XPath expression, ignoring errormessages and value results
+	ignoreInfoInXPathExpression: () ->
+		$input = $ '#xpath'
 		
 	renderHelpSheetCompletions: ->
 		items = ""
-		items += ("\n<dt>#{shortcut} &#x21E5;</dt>\n<dd>#{shortcut}#{completion}</dd>") for shortcut, completion of FiddleController.COMPLETIONS 
+		items += ("\n<dt>#{shortcut} &#x21E5;</dt>\n<dd>#{shortcut}#{completion.replace('|', '')}</dd>") for shortcut, completion of FiddleController.COMPLETIONS 
 		list = $ "<h2>TAB completions</h2>\n<dl>#{items}</dl>"
 		($ '#help').append list
 
