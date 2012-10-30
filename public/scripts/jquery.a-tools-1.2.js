@@ -4,6 +4,8 @@
  * Copyright (c) 2009 Andrey Kramarev, Ampparit Inc. (www.ampparit.com)
  * Licensed under the MIT license.
  * http://www.ampparit.fi/a-tools/license.txt
+ * 
+ * Modifications 2012 by Chriztian Steinmeier, Vokseværk (vokseverk.dk)
  *
  * Basic usage:
  
@@ -296,14 +298,14 @@ Zepto.extend(Zepto.fn, {
 	getCaretPos: function() {
 		var input = $.zepto.isZ(this) ? this[0] : this;
 		if ('selectionStart' in input) {
-			 return input.selectionStart;
+			 return input.selectionStart + 1;
 		} else if (document.selection) {
 			// IE
 			input.focus();
 			var sel = document.selection.createRange();
 			var selLen = document.selection.createRange().text.length;
 			sel.moveStart('character', -input.value.length);
-			return sel.text.length - selLen;
+			return (sel.text.length - selLen) + 1;
 		}
 	},
 	
@@ -468,5 +470,25 @@ Zepto.extend(Zepto.fn, {
 			} else { return this; }
 		})
 		return this;
+	},
+	
+	setSelection: function(start, end) {
+		var input = $.zepto.isZ(this) ? this[0] : this;
+		if ('createTextRange' in input) {
+			/*	IE calculates the end of selection range based 
+				from the starting point.
+				Other browsers will calculate end of selection from
+				the beginning of given text node. */
+			var newend = end - start;
+			var selRange = input.createTextRange();
+			selRange.collapse(true);
+			selRange.moveStart("character", start);
+			selRange.moveEnd("character", newend);
+			selRange.select();
+		} else if ('setSelectionRange' in input) {
+			/* For the other browsers */
+			input.setSelectionRange(start, end);
+		}
+		input.focus();
 	}
 }); 

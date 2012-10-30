@@ -30,7 +30,7 @@
     XPATHKEY = 120;
 
     FiddleController.COMPLETIONS = {
-      "pro": "cessing-instruction()",
+      "pro": "cessing-instruction('|')",
       "com": "ment()",
       "tex": "t()",
       "nod": "e()",
@@ -40,26 +40,26 @@
       "anc": "estor-or-self::",
       "des": "cendant-or-self::",
       "par": "ent::",
-      "norm": "alize-space()",
+      "norm": "alize-space(|)",
       "gen": "erate-id()",
       "nam": "e()",
       "loc": "al-name()",
-      "str": "ing()",
-      "con": "tains()",
-      "sta": "rts-with()",
-      "tr": "anslate()",
-      "conc": "at()",
-      "for": "mat-number()",
+      "str": "ing(|)",
+      "con": "tains(|)",
+      "sta": "rts-with(|)",
+      "tr": "anslate(|)",
+      "conc": "at(|)",
+      "for": "mat-number(|)",
       "pos": "ition()",
-      "cou": "nt()",
-      "cei": "ling()",
-      "flo": "or()",
-      "rou": "nd()",
-      "num": "ber()",
-      "lan": "g()",
+      "cou": "nt(|)",
+      "cei": "ling(|)",
+      "flo": "or(|)",
+      "rou": "nd(|)",
+      "num": "ber(|)",
+      "lan": "g('|')",
       "las": "t()",
-      "not": "()",
-      "bool": "ean()",
+      "not": "(|)",
+      "bool": "ean(|)",
       "tru": "e()",
       "fal": "se()"
     };
@@ -69,7 +69,7 @@
     }
 
     FiddleController.prototype.setup = function() {
-      this.focusAndSelect("#xpath");
+      this.focusAndSelect('#xpath');
       ($(".doc-toggle")).on("click", function(e) {
         e.preventDefault();
         return app.controller.toggleFold();
@@ -84,10 +84,10 @@
 
     FiddleController.prototype.toggleFold = function() {
       var $fold;
-      $fold = $("#xml-document");
+      $fold = $('#xml-document');
       $fold.toggleClass("out");
       if ($fold.hasClass("out")) {
-        return this.focusAndSelect("#xdoc");
+        return this.focusAndSelect('#xdoc');
       }
     };
 
@@ -123,18 +123,25 @@
     };
 
     FiddleController.prototype.tabCompletion = function(event) {
-      var $input, completion, pos, shortcut, uptoHere, _ref1, _results;
+      var $input, caretPos, caretPosInCompletion, completion, pos, shortcut, uptoHere, _ref1, _results;
       if (event.keyCode === TABKEY) {
         $input = $(this);
         pos = $input.getCaretPos();
-        uptoHere = $input.val().substring(0, pos);
+        uptoHere = $input.val().substring(0, pos - 1);
         _ref1 = FiddleController.COMPLETIONS;
         _results = [];
         for (shortcut in _ref1) {
           completion = _ref1[shortcut];
           if (uptoHere.slice(-shortcut.length) === shortcut) {
             event.preventDefault();
-            $input.insertAtCaretPos(completion);
+            $input.insertAtCaretPos(completion.replace('|', ''));
+            caretPos = $input.getCaretPos();
+            caretPosInCompletion = completion.indexOf('|');
+            if (caretPosInCompletion >= 0) {
+              $input.setCaretPos(caretPos - (completion.length - caretPosInCompletion) + 1);
+            } else {
+              $input.setCaretPos(caretPos);
+            }
             break;
           } else {
             _results.push(void 0);
@@ -164,14 +171,16 @@
         event.preventDefault();
         pair = FiddleController.PAIRS[code];
         $input.insertAtCaretPos(pair);
-        return $input.setCaretPos($input.getCaretPos());
+        return $input.setCaretPos($input.getCaretPos() - 1);
       }
     };
 
-    FiddleController.prototype.sendCharacters = function(chars) {
-      var oldValue;
-      oldValue = ($('#xpath')).val();
-      return ($('#xpath')).val(oldValue + chars);
+    FiddleController.prototype.ignoreInfoInXPathExpression = function() {
+      var $input, check, infoRE;
+      infoRE = /\s(=>|<--)\s/;
+      $input = $('#xpath');
+      check = $input.val().match(infoRE);
+      return $input.setSelection(0, check ? check.index : $input.val().length);
     };
 
     FiddleController.prototype.renderHelpSheetCompletions = function() {
@@ -180,7 +189,7 @@
       _ref1 = FiddleController.COMPLETIONS;
       for (shortcut in _ref1) {
         completion = _ref1[shortcut];
-        items += "\n<dt>" + shortcut + " &#x21E5;</dt>\n<dd>" + shortcut + completion + "</dd>";
+        items += "\n<dt>" + shortcut + " &#x21E5;</dt>\n<dd>" + shortcut + (completion.replace('|', '')) + "</dd>";
       }
       list = $("<h2>TAB completions</h2>\n<dl>" + items + "</dl>");
       return ($('#help')).append(list);
