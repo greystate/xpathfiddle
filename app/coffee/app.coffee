@@ -80,11 +80,17 @@ class FiddleController
 	toggleHelp: () ->
 		($ 'body').toggleClass "showhelp"
 
-	focusAndSelect: (field) ->
+	focusAndSelect: (field = '#xpath') ->
+		DELAY = 300
 		$field = $ field
-		window.setTimeout ->
-			$field[0].select()
-		, 300
+		if field is '#xpath'
+			window.setTimeout =>
+				@ignoreInfoInXPathExpression()
+			, DELAY
+		else
+			window.setTimeout ->
+				$field[0].select()
+			, DELAY
 
 	assignKeys: () ->
 		controller = @

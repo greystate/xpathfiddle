@@ -96,11 +96,22 @@
     };
 
     FiddleController.prototype.focusAndSelect = function(field) {
-      var $field;
+      var $field, DELAY,
+        _this = this;
+      if (field == null) {
+        field = '#xpath';
+      }
+      DELAY = 300;
       $field = $(field);
-      return window.setTimeout(function() {
-        return $field[0].select();
-      }, 300);
+      if (field === '#xpath') {
+        return window.setTimeout(function() {
+          return _this.ignoreInfoInXPathExpression();
+        }, DELAY);
+      } else {
+        return window.setTimeout(function() {
+          return $field[0].select();
+        }, DELAY);
+      }
     };
 
     FiddleController.prototype.assignKeys = function() {
