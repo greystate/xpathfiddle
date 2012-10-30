@@ -443,16 +443,15 @@ pre code {
   font-weight: bold;
 }
 .xmlverb-comment {
-  color: #006600;
+  color: #888888;
   font-style: italic;
 }
 .xmlverb-pi-name {
-  color: #006600;
-  font-style: italic;
+  color: #000099;
 }
 .xmlverb-pi-content {
-  color: #006666;
-  font-style: italic;
+  color: #000099;
+  font-weight: bold;
 }
 .xpath-match {
   -webkit-border-radius: 6px;
