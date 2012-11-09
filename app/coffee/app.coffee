@@ -135,7 +135,7 @@ class FiddleController
 				app.controller.toggleHelp()
 			when XPATHKEY
 				# Only focus the field if we're not in it, otherwise we let the character output
-				app.controller.focusAndSelect '#xpath' unless event.target.id is 'xpath'
+				app.controller.focusAndSelect '#xpath' unless event.target.tagName is 'INPUT'
 
 	# * `[`, `(` and `'` will trigger insertion of the corresponding `]`, `)` or `'` to complete the pair
 	handleKeypress: (event) ->
