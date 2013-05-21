@@ -64,7 +64,7 @@
 				<fieldset id="xpath-expression">
 					<legend>XPath</legend>
 					<label for="xpath">Expression</label>
-					<input id="xpath" name="xpath" type="text" placeholder="Type an expression, e.g.: person[2]/name" tabindex="1" autocapitalize="off" autocorrect="off">
+					<input id="xpath" name="xpath" type="text" placeholder="Type an expression, e.g.: person[2]/name" tabindex="1" autocapitalize="off" autocorrect="off" autocomplete="off">
 						<xsl:if test="$xpathSend">
 							<xsl:attribute name="value">
 								<xsl:value-of select="$xpathSend" />
