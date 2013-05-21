@@ -25,7 +25,14 @@ namespace XPathFiddle
 						manager.AddNamespace(ns.Key, ns.Value);
 					}
 
-					return (XPathNodeIterator)nav.Evaluate(xpath, manager);
+					var result = nav.Evaluate(xpath, manager);
+					if (result is XPathNodeIterator) {
+						return (XPathNodeIterator)result;
+					} else {
+						XmlDocument doc = new XmlDocument();
+						doc.LoadXml("<result expression=\"" + xpath + "\">" + result.ToString() + "</result>");
+						return (XPathNodeIterator)doc.DocumentElement.CreateNavigator().Evaluate("/result");
+					}
 				}
 			}
 			catch (Exception ex)

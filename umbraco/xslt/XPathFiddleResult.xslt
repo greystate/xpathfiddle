@@ -16,9 +16,12 @@
 	<xsl:param name="currentPage" />
 	<xsl:variable name="siteRoot" select="$currentPage/ancestor-or-self::Website" />
 	
+	<xsl:variable name="debug" select="false()" />
+	
 	<xsl:variable name="quot" select="'&quot;'" />
 	<xsl:variable name="apos">'</xsl:variable>
 	<xsl:variable name="errorFlag" select="' &lt;-- '" />
+	<xsl:variable name="resultFlag" select="' =&gt; '" />
 
 	<!-- Grab QueryString params -->
 	<xsl:variable name="doc" select="normalize-space(umb:RequestQueryString('xdoc'))" />
@@ -37,6 +40,9 @@
 			<xsl:when test="contains($xpath, $errorFlag)">
 				<xsl:value-of select="substring-before($xpath, $errorFlag)" />
 			</xsl:when>
+			<xsl:when test="contains($xpath, $resultFlag)">
+				<xsl:value-of select="substring-before($xpath, $resultFlag)" />
+			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of select="$xpath" />
 			</xsl:otherwise>
@@ -45,6 +51,7 @@
 	<xsl:variable name="matched-nodes" select="xpf:FilterNodes($data, $xpathSend)" />
 	
 	<xsl:variable name="xpath-error" select="$matched-nodes[descendant-or-self::Exception][normalize-space($xpathSend)]" />
+	<xsl:variable name="xpath-value" select="$matched-nodes/descendant-or-self::result[@expression]" />
 	
 	<xsl:template match="/">
 		
@@ -63,6 +70,9 @@
 								<xsl:value-of select="$xpathSend" />
 								<xsl:if test="$xpath-error">
 									<xsl:value-of select="concat($errorFlag, $xpath-error//Message)" />
+								</xsl:if>
+								<xsl:if test="$xpath-value">
+									<xsl:apply-templates select="$xpath-value" />
 								</xsl:if>
 							</xsl:attribute>
 						</xsl:if>
@@ -117,6 +127,7 @@
 			</xsl:if>
 		
 		</div>
+		<xsl:call-template name="debug" />
 	</xsl:template>
 	
 	<xsl:template name="HelpSheet">
@@ -137,7 +148,24 @@
 				Typing <code>(</code>, <code>[</code> or <code>'</code> will automatically insert
 				the matching character after it.
 			</p>
-		</section>		
+		</section>
+	</xsl:template>
+	
+	<xsl:template match="result[@expression]">
+		<xsl:value-of select="concat($resultFlag, .)" />
+	</xsl:template>
+	
+	<xsl:template match="result[. = 'True'] | result[. = 'False']">
+		<xsl:value-of select="concat($resultFlag, translate(., 'TF', 'tf'), '()')" />
+	</xsl:template>
+	
+	<xsl:template name="debug">
+		<xsl:if test="$debug">
+			<textarea rows="8" cols="40">
+				<xsl:comment>$matched-nodes</xsl:comment>
+				<xsl:copy-of select="$matched-nodes" />
+			</textarea>
+		</xsl:if>
 	</xsl:template>
 	
 </xsl:stylesheet>
